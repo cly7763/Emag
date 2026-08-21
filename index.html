@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JLNJYHGTV9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JLNJYHGTV9');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-6397254392843786">
+  <title>Emag - 게이머를 위한 종합 정보 & 유틸리티 포털</title>
+  <style>
+    :root {
+      --bg-color: #0f0f12;
+      --card-bg: #18181c;
+      --card-hover: #222228;
+      --text-color: #f0f0f5;
+      --desc-color: #9c9ca8;
+      --border-color: #2a2a32;
+      --accent-maple: #ff9800;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단 네비게이션 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent-maple); }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* 메인 컨테이너 */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 50px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* 히어로 섹션 */
+    .hero {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.8px;
+    }
+    .hero p {
+      color: var(--desc-color);
+      font-size: 1.15rem;
+    }
+
+    /* 게임 카테고리 섹션 */
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--accent-maple);
+      border-radius: 2px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 22px;
+      margin-bottom: 60px;
+    }
+
+    .game-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      background: var(--card-hover);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .game-card.maple:hover { border-color: var(--accent-maple); }
+
+    .game-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
+    .game-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .game-desc {
+      font-size: 0.92rem;
+      color: var(--desc-color);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .tag {
+      font-size: 0.75rem;
+      background: #25252d;
+      color: #c0c0cc;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-maple);
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+    }
+
+    /* 준비 중 카드 스타일 */
+    .game-card.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .game-card.disabled:hover {
+      transform: none;
+      border-color: var(--border-color);
+      box-shadow: none;
+      background: var(--card-bg);
+    }
+
+    /* 블로그 최신 소식 섹션 */
+    .post-list {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .post-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+    .post-item:last-child { border-bottom: none; }
+    .post-item:hover { background: var(--card-hover); }
+    .post-title { font-size: 0.95rem; font-weight: 500; }
+    .post-date { font-size: 0.8rem; color: var(--desc-color); }
+
+    /* 푸터 */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+  </style>
+  
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">E<span>mag</span></a>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>게임을 더 즐겁고 편리하게</h1>
+      <p>Emag에서 지원하는 게임별 도구 및 분석 리포트를 확인해보세요.</p>
+    </section>
+
+    <div class="section-title">게임별 허브 & 유틸리티</div>
+    <div class="game-grid">
+      
+      <a href="maple/index.html" class="game-card maple">
+        <div>
+          <div class="game-icon">🍁</div>
+          <h2 class="game-title">메이플스토리 (MapleStory)</h2>
+          <p class="game-desc">Open API 실시간 캐릭터 조회, 주간/월간 보스 결정석 계산기, 심볼 및 스타포스 기댓값 시뮬레이터를 제공합니다.</p>
+          <div class="tag-list">
+            <span class="tag">캐릭터 검색</span>
+            <span class="tag">결정석 계산기</span>
+            <span class="tag">심볼 계산기</span>
+            <span class="tag">스타포스</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>메이플 허브 입장하기</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <div class="game-card disabled">
+        <div>
+          <div class="game-icon">⏳</div>
+          <h2 class="game-title">새로운 게임 및 기능 준비 중...</h2>
+          <p class="game-desc">더 많은 인기 게임의 전적 검색기, 공략 데이터베이스 및 유저 편의 도구가 순차적으로 추가될 예정입니다.</p>
+          <div class="tag-list">
+            <span class="tag">신규 게임 지원</span>
+            <span class="tag">공략 DB</span>
+            <span class="tag">유틸리티 확장</span>
+          </div>
+        </div>
+        <div class="card-footer" style="color: var(--desc-color);">
+          <span>업데이트 준비 중</span>
+          <span>🔒</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-title" id="blog">Emag 최신 게임 팁 & 소식</div>
+    <div class="post-list">
+      <a href="maple/index.html" class="post-item">
+        <div class="post-title">[메이플] 넥슨 Open API 캐릭터 검색, 보스 결정석, 심볼 및 스타포스 계산기 정식 오픈</div>
+        <div class="post-date">2026.08.20</div>
+      </a>
+      <a href="#" class="post-item">
+        <div class="post-title">[안내] Emag 포털 오픈 안내 및 향후 기능 지원 계획</div>
+        <div class="post-date">2026.08.20</div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© Emag Gaming Hub & Blog. All rights reserved.</p>
+  </footer>
+
+</body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS9ZHKPN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emag Maple - 보스 결정석 계산기</title>
+  <style>
+    :root {
+      --bg-color: #121214;
+      --card-bg: #1e1e24;
+      --card-hover: #26262e;
+      --text-color: #e1e1e6;
+      --accent-color: #ff9800;
+      --desc-color: #a8a8b3;
+      --border-color: #29292e;
+      --selected-bg: #2d261e;
+      --selected-border: #ff9800;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단 네비게이션 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-btn {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      color: #fff;
+      border-color: var(--desc-color);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 16px;
+    }
+    .nav-links a.active { color: var(--accent-color); font-weight: 600; }
+
+    /* 메인 컨테이너 */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .header-area {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header-area h1 { font-size: 2rem; margin-bottom: 8px; }
+    .header-area p { color: var(--desc-color); }
+
+    /* 고정형 요약 카드 */
+    .summary-card {
+      background: var(--card-bg);
+      border: 2px solid var(--accent-color);
+      border-radius: 16px;
+      padding: 22px 28px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 8px 30px rgba(255, 152, 0, 0.12);
+    }
+    .summary-item .label { font-size: 0.85rem; color: var(--desc-color); margin-bottom: 4px; }
+    .summary-item .value { font-size: 1.6rem; font-weight: 800; color: #fff; }
+    .summary-item .value.gold { color: var(--accent-color); }
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--desc-color);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover { background: #25252d; color: #fff; }
+
+    /* 보스 리스트 그리드 */
+    .boss-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+    .boss-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s;
+    }
+    .boss-item:hover { background: var(--card-hover); }
+    .boss-item.active {
+      background: var(--selected-bg);
+      border-color: var(--selected-border);
+    }
+    .boss-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .boss-name { font-weight: 600; font-size: 0.98rem; }
+    .boss-price { font-size: 0.82rem; color: var(--desc-color); }
+
+    /* 파티 인원 선택 */
+    .party-select {
+      background: #141418;
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html" class="nav-btn">⬅ Emag 메인</a>
+      <a href="index.html" class="nav-btn">🍁 메이플 홈</a>
+      <a href="index.html" class="logo">Emag Maple</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="header-area">
+      <h1>주간 보스 결정석 계산기</h1>
+      <p>클리어한 보스를 선택하면 주간 12개 상위 결정석 수익을 자동 계산합니다.</p>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-item">
+        <div class="label">선택 보스 수 / 주간 상한</div>
+        <div class="value"><span id="selectedCount">0</span> / 12개</div>
+      </div>
+      <div class="summary-item">
+        <div class="label">이번 주 총 예상 수익 (메소)</div>
+        <div class="value gold" id="totalPrice">0 메소</div>
+      </div>
+      <button class="reset-btn" id="resetBtn">선택 초기화</button>
+    </div>
+
+    <div class="boss-grid" id="bossListContainer"></div>
+  </main>
+
+  <footer>
+    <p>결정석 가격 기준은 패치에 따라 변동될 수 있습니다. | Emag Gaming Hub</p>
+  </footer>
+
+  <script>
+    // 보스 데이터 정의 (기본 가격 기준)
+    const BOSS_DATA = [
+      { id: 'ez_cyg', name: '이지 시그너스', price: 9100000 },
+      { id: 'n_zak', name: '카오스 자쿰', price: 16200000 },
+      { id: 'c_root_p', name: '카오스 피에르', price: 16200000 },
+      { id: 'c_root_b', name: '카오스 반반', price: 16200000 },
+      { id: 'c_root_q', name: '카오스 블러디퀸', price: 16200000 },
+      { id: 'c_root_v', name: '카오스 벨룸', price: 21000000 },
+      { id: 'h_mag', name: '하드 매그너스', price: 19000000 },
+      { id: 'n_cyg', name: '노말 시그너스', price: 14500000 },
+      { id: 'c_pap', name: '카오스 파풀라투스', price: 26000000 },
+      { id: 'n_lomien_s', name: '노말 스우', price: 34000000 },
+      { id: 'n_lomien_d', name: '노말 데미안', price: 36000000 },
+      { id: 'e_luci', name: '이지 루시드', price: 45000000 },
+      { id: 'e_will', name: '이지 윌', price: 48000000 },
+      { id: 'n_luci', name: '노말 루시드', price: 95000000 },
+      { id: 'n_will', name: '노말 윌', price: 105000000 },
+      { id: 'n_gloom', name: '노말 더스크', price: 125000000 },
+      { id: 'n_dunk', name: '노말 듄켈', price: 135000000 },
+      { id: 'h_lomien_s', name: '하드 스우', price: 190000000 },
+      { id: 'h_lomien_d', name: '하드 데미안', price: 180000000 },
+      { id: 'h_luci', name: '하드 루시드', price: 230000000 },
+      { id: 'h_will', name: '하드 윌', price: 260000000 },
+      { id: 'c_gloom', name: '카오스 더스크', price: 280000000 },
+      { id: 'h_dunk', name: '하드 듄켈', price: 310000000 },
+      { id: 'h_jin', name: '하드 진힐라', price: 350000000 },
+      { id: 'c_seren', name: '카오스 세렌', price: 650000000 },
+      { id: 'h_kalos', name: '하드 카칼로스', price: 980000000 }
+    ];
+
+    const state = {}; // { bossId: { selected: bool, party: number } }
+
+    const container = document.getElementById('bossListContainer');
+    const selectedCountEl = document.getElementById('selectedCount');
+    const totalPriceEl = document.getElementById('totalPrice');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function init() {
+      BOSS_DATA.forEach(boss => {
+        state[boss.id] = { selected: false, party: 1 };
+
+        const item = document.createElement('div');
+        item.className = 'boss-item';
+        item.id = `item-${boss.id}`;
+
+        item.innerHTML = `
+          <div class="boss-item-info">
+            <span class="boss-name">${boss.name}</span>
+            <span class="boss-price">${boss.price.toLocaleString()} 메소</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;" onclick="event.stopPropagation();">
+            <select class="party-select" id="party-${boss.id}">
+              <option value="1">솔플</option>
+              <option value="2">2인</option>
+              <option value="3">3인</option>
+              <option value="4">4인</option>
+              <option value="5">5인</option>
+              <option value="6">6인</option>
+            </select>
+          </div>
+        `;
+
+        item.addEventListener('click', () => toggleBoss(boss.id));
+        item.querySelector('select').addEventListener('change', (e) => {
+          state[boss.id].party = Number(e.target.value);
+          if (state[boss.id].selected) calculate();
+        });
+
+        container.appendChild(item);
+      });
+    }
+
+    function toggleBoss(id) {
+      state[id].selected = !state[id].selected;
+      const el = document.getElementById(`item-${id}`);
+      el.classList.toggle('active', state[id].selected);
+      calculate();
+    }
+
+    function calculate() {
+      const selectedBosses = [];
+
+      BOSS_DATA.forEach(boss => {
+        if (state[boss.id].selected) {
+          const splitPrice = Math.floor(boss.price / state[boss.id].party);
+          selectedBosses.push({ ...boss, finalPrice: splitPrice });
+        }
+      });
+
+      // 가장 비싼 결정석 순으로 정렬 후 상위 12개 선정
+      selectedBosses.sort((a, b) => b.finalPrice - a.finalPrice);
+      const top12 = selectedBosses.slice(0, 12);
+      const total = top12.reduce((acc, cur) => acc + cur.finalPrice, 0);
+
+      selectedCountEl.textContent = selectedBosses.length;
+      totalPriceEl.textContent = `${total.toLocaleString()} 메소`;
+    }
+
+    resetBtn.addEventListener('click', () => {
+      BOSS_DATA.forEach(boss => {
+        state[boss.id].selected = false;
+        state[boss.id].party = 1;
+        document.getElementById(`item-${boss.id}`).classList.remove('active');
+        document.getElementById(`party-${boss.id}`).value = "1";
+      });
+      calculate();
+    });
+
+    init();
+  </script>
+</body>
+</html>

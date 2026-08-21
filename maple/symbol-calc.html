@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emag Maple - 심볼 계산기</title>
+  <style>
+    :root {
+      --bg-color: #121214;
+      --card-bg: #1e1e24;
+      --card-hover: #26262e;
+      --text-color: #e1e1e6;
+      --accent-color: #ff9800;
+      --desc-color: #a8a8b3;
+      --border-color: #29292e;
+      --input-bg: #141418;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단 네비게이션 통일 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-btn {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      color: #fff;
+      border-color: var(--desc-color);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-color); }
+    .nav-links a.active { color: var(--accent-color); font-weight: 600; }
+
+    /* 메인 컨테이너 */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .header-area {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header-area h1 { font-size: 2rem; margin-bottom: 8px; }
+    .header-area p { color: var(--desc-color); }
+
+    .calc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .form-group { margin-bottom: 18px; }
+    label { display: block; font-size: 0.88rem; color: var(--desc-color); margin-bottom: 6px; }
+    select, input {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    select:focus, input:focus { border-color: var(--accent-color); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .btn-calc {
+      width: 100%;
+      background: var(--accent-color);
+      border: none;
+      color: #121214;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: opacity 0.2s;
+    }
+    .btn-calc:hover { opacity: 0.9; }
+
+    .result-box {
+      display: none;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.95rem;
+    }
+    .result-item:last-child { border-bottom: none; }
+    .result-item .val { font-weight: 700; color: var(--accent-color); font-size: 1.05rem; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html" class="nav-btn">⬅ Emag 메인</a>
+      <a href="index.html" class="nav-btn">🍁 메이플 홈</a>
+      <a href="index.html" class="logo">Emag Maple</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="header-area">
+      <h1>아케인 / 어센틱 심볼 계산기</h1>
+      <p>목표 레벨까지 필요한 심볼 개수, 비용 및 소요 기간을 실시간으로 계산합니다.</p>
+    </div>
+
+    <div class="calc-card">
+      <div class="form-group">
+        <label>심볼 유형</label>
+        <select id="symbolType" onchange="onTypeChange()">
+          <option value="arcane">아케인 심볼 (Max Lv.20)</option>
+          <option value="authentic">어센틱 심볼 (Max Lv.11)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>지역 선택</label>
+        <select id="regionSelect"></select>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>현재 레벨</label>
+          <input type="number" id="curLevel" value="1" min="1" max="20">
+        </div>
+        <div class="form-group">
+          <label>목표 레벨</label>
+          <input type="number" id="targetLevel" value="20" min="1" max="20">
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label>현재 보유 중인 심볼 개수</label>
+          <input type="number" id="curExp" value="0" min="0">
+        </div>
+        <div class="form-group">
+          <label>일일 획득량 (일퀘)</label>
+          <input type="number" id="dailyGain" value="20" min="1">
+        </div>
+      </div>
+
+      <button class="btn-calc" onclick="calculateSymbol()">계산하기</button>
+
+      <div id="resultBox" class="result-box">
+        <div class="result-item">
+          <span>필요한 총 심볼 개수</span>
+          <span class="val" id="resTotalExp">0 개</span>
+        </div>
+        <div class="result-item">
+          <span>추가 필요 심볼 개수</span>
+          <span class="val" id="resNeedExp">0 개</span>
+        </div>
+        <div class="result-item">
+          <span>총 소요 비용 (메소)</span>
+          <span class="val" id="resTotalMeso">0 메소</span>
+        </div>
+        <div class="result-item">
+          <span>완성까지 남은 기간</span>
+          <span class="val" id="resDays">0 일</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Data based on MapleStory Formulas | Emag Gaming Hub</p>
+  </footer>
+
+  <script>
+    const arcaneRegions = ["소멸의 여로", "츄츄 아일랜드", "레헬른", "아르카나", "모라스", "에스페라"];
+    const authenticRegions = ["세르니움", "아르크스", "오디움", "도원경", "아르테리아", "카르시온", "탈라하트"];
+
+    function onTypeChange() {
+      const type = document.getElementById('symbolType').value;
+      const regionSel = document.getElementById('regionSelect');
+      const curL = document.getElementById('curLevel');
+      const tgtL = document.getElementById('targetLevel');
+      
+      regionSel.innerHTML = "";
+      if(type === 'arcane') {
+        arcaneRegions.forEach((r, idx) => regionSel.add(new Option(r, idx)));
+        curL.max = 20; tgtL.max = 20; tgtL.value = 20;
+        document.getElementById('dailyGain').value = 20;
+      } else {
+        authenticRegions.forEach((r, idx) => regionSel.add(new Option(r, idx)));
+        curL.max = 11; tgtL.max = 11; tgtL.value = 11;
+        document.getElementById('dailyGain').value = 10;
+      }
+    }
+
+    function getArcaneRequiredExp(lv) { return lv * lv + 11; }
+    function getAuthenticRequiredExp(lv) { return 9 * lv * lv + 20 * lv; }
+
+    function getArcaneCost(regionIdx, lv) {
+      const baseCost = [9600000, 12600000, 15600000, 18600000, 21600000, 24600000][regionIdx];
+      const stepCost = 7130000;
+      return baseCost + (lv - 1) * stepCost;
+    }
+
+    function getAuthenticCost(regionIdx, lv) {
+      const baseCost = [96900000, 106600000, 116300000, 126000000, 135700000, 145400000, 155100000][regionIdx];
+      const stepCost = 88500000;
+      return baseCost + (lv - 1) * stepCost;
+    }
+
+    function calculateSymbol() {
+      const type = document.getElementById('symbolType').value;
+      const regionIdx = parseInt(document.getElementById('regionSelect').value);
+      const curLv = parseInt(document.getElementById('curLevel').value);
+      const tgtLv = parseInt(document.getElementById('targetLevel').value);
+      const curExp = parseInt(document.getElementById('curExp').value) || 0;
+      const dailyGain = parseInt(document.getElementById('dailyGain').value) || 1;
+
+      if (curLv >= tgtLv) {
+        alert("목표 레벨은 현재 레벨보다 높아야 합니다.");
+        return;
+      }
+
+      let totalExp = 0;
+      let totalCost = 0;
+
+      for (let lv = curLv; lv < tgtLv; lv++) {
+        const need = type === 'arcane' ? getArcaneRequiredExp(lv) : getAuthenticRequiredExp(lv);
+        const cost = type === 'arcane' ? getArcaneCost(regionIdx, lv) : getAuthenticCost(regionIdx, lv);
+        totalExp += need;
+        totalCost += cost;
+      }
+
+      const remainExp = Math.max(0, totalExp - curExp);
+      const days = Math.ceil(remainExp / dailyGain);
+      const months = (days / 30.4).toFixed(1);
+
+      document.getElementById('resTotalExp').innerText = totalExp.toLocaleString() + " 개";
+      document.getElementById('resNeedExp').innerText = remainExp.toLocaleString() + " 개";
+      document.getElementById('resTotalMeso').innerText = (totalCost / 100000000).toFixed(2) + " 억 메소 (" + totalCost.toLocaleString() + " 메소)";
+      document.getElementById('resDays').innerText = `${days} 일 (약 ${months}개월)`;
+
+      document.getElementById('resultBox').style.display = 'block';
+    }
+
+    onTypeChange();
+  </script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emag Maple - 캐릭터 정보 검색</title>
+  <style>
+    :root {
+      --bg-color: #121214;
+      --card-bg: #1e1e24;
+      --card-hover: #26262e;
+      --text-color: #e1e1e6;
+      --accent-color: #ff9800;
+      --desc-color: #a8a8b3;
+      --border-color: #29292e;
+      --stat-bg: #16161a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단 네비게이션 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-btn {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      color: #fff;
+      border-color: var(--desc-color);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 16px;
+    }
+    .nav-links a.active { color: var(--accent-color); font-weight: 600; }
+
+    /* 컨테이너 */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .header-area {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header-area h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+    .header-area p { color: var(--desc-color); }
+
+    /* 검색창 */
+    .search-box {
+      display: flex;
+      gap: 10px;
+      max-width: 540px;
+      margin: 0 auto 35px auto;
+    }
+    .search-input {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 14px 18px;
+      font-size: 1rem;
+      color: #fff;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--accent-color); }
+    .search-btn {
+      background: var(--accent-color);
+      color: #121214;
+      border: none;
+      padding: 0 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .search-btn:hover { opacity: 0.9; }
+
+    /* 로딩 / 에러 메시지 */
+    .status-msg {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--desc-color);
+      margin: 30px 0;
+      display: none;
+    }
+
+    /* 결과 카드 */
+    .result-card {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    /* 기존 .profile-img 관련 코드를 아래로 교체 */
+    .profile-img {
+      width: 130px;
+      height: 130px;
+      background: var(--stat-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* 박스 밖으로 삐져나오는 부분 깔끔하게 자름 */
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .profile-img img {
+      /* 캐릭터 크기를 2.2배 확대 (원하시면 2.0 ~ 2.5 사이로 조절 가능) */
+      transform: scale(2.2);
+      image-rendering: pixelated; /* 도트가 뭉개지지 않고 선명하게 확대 */
+      display: block;
+    }
+    .profile-info h2 { font-size: 1.6rem; color: #fff; margin-bottom: 4px; }
+    .profile-info .badge {
+      display: inline-block;
+      background: #332314;
+      color: var(--accent-color);
+      font-size: 0.8rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .profile-info .sub-text {
+      color: var(--desc-color);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* 스탯 그리드 */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .stat-item {
+      background: var(--stat-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--desc-color);
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .stat-val.highlight { color: var(--accent-color); font-size: 1.3rem; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html" class="nav-btn">⬅ Emag 메인</a>
+      <a href="index.html" class="nav-btn">🍁 메이플 홈</a>
+      <a href="index.html" class="logo">Emag Maple</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="header-area">
+      <h1>캐릭터 정보 검색</h1>
+      <p>넥슨 공식 Open API를 통해 실시간 캐릭터 스펙을 확인하세요.</p>
+    </div>
+
+    <form class="search-box" id="searchForm">
+      <input type="text" id="charName" class="search-input" placeholder="캐릭터 닉네임을 입력하세요" required autocomplete="off" />
+      <button type="submit" class="search-btn">검색</button>
+    </form>
+
+    <div id="statusMsg" class="status-msg">데이터를 불러오는 중입니다...</div>
+
+    <div id="resultCard" class="result-card">
+      <div class="profile-header">
+        <div class="profile-img" id="charImgBox">
+          <span style="font-size: 2rem;">🍁</span>
+        </div>
+        <div class="profile-info">
+          <div>
+            <span class="badge" id="worldName">월드</span>
+            <span class="badge" id="jobName" style="background:#25252d; color:#c0c0cc;">직업</span>
+          </div>
+          <h2 id="dispName">닉네임</h2>
+          <div class="sub-text">
+            <span>Lv. <strong id="charLevel">200</strong></span> | 
+            <span>길드: <strong id="guildName">-</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-item" style="grid-column: 1 / -1;">
+          <div class="stat-label">전투력</div>
+          <div class="stat-val highlight" id="combatPower">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">스탯 공격력 (최대)</div>
+          <div class="stat-val" id="statMax">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">주스탯</div>
+          <div class="stat-val" id="mainStat">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">보스 데미지</div>
+          <div class="stat-val" id="bossDmg">0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">방어율 무시</div>
+          <div class="stat-val" id="ignoreDef">0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">크리티컬 데미지</div>
+          <div class="stat-val" id="critDmg">0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">아케인포스 / 어센틱포스</div>
+          <div class="stat-val" id="forces">0 / 0</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Data based on NEXON Open API | Emag Gaming Hub</p>
+  </footer>
+
+  <script>
+    // 넥슨 Open API 연동 로직
+    const API_KEY = "test_5ee537d2a96818c0e61b18515822ca3205307be76c74f0dcd3946bf6f872c151efe8d04e6d233bd35cf2fabdeb93fb0d"; // 여기에 발급받으신 Nexon API Key 입력
+
+    const searchForm = document.getElementById('searchForm');
+    const charInput = document.getElementById('charName');
+    const statusMsg = document.getElementById('statusMsg');
+    const resultCard = document.getElementById('resultCard');
+
+    searchForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nickname = charInput.value.trim();
+      if (!nickname) return;
+
+      statusMsg.style.display = 'block';
+      statusMsg.style.color = '#a8a8b3';
+      statusMsg.textContent = `'${nickname}' 캐릭터 정보를 조회하는 중...`;
+      resultCard.style.display = 'none';
+
+      try {
+        // 1. ocid 식별자 조회
+        const ocidRes = await fetch(`https://open.api.nexon.com/maplestory/v1/id?character_name=${encodeURIComponent(nickname)}`, {
+          headers: { "x-nxopen-api-key": API_KEY }
+        });
+        if (!ocidRes.ok) throw new Error('캐릭터를 찾을 수 없거나 API 키가 올바르지 않습니다.');
+        const ocidData = await ocidRes.json();
+        const ocid = ocidData.ocid;
+
+        // 2. 기본 정보 및 스탯 정보 병합 조회
+        const [basicRes, statRes] = await Promise.all([
+          fetch(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocid}`, { headers: { "x-nxopen-api-key": API_KEY } }),
+          fetch(`https://open.api.nexon.com/maplestory/v1/character/stat?ocid=${ocid}`, { headers: { "x-nxopen-api-key": API_KEY } })
+        ]);
+
+        const basic = await basicRes.json();
+        const stat = await statRes.json();
+
+        // 데이터 렌더링
+        document.getElementById('dispName').textContent = basic.character_name;
+        document.getElementById('worldName').textContent = basic.world_name;
+        document.getElementById('jobName').textContent = basic.character_class;
+        document.getElementById('charLevel').textContent = basic.character_level;
+        document.getElementById('guildName').textContent = basic.character_guild_name || '없음';
+
+        if (basic.character_image) {
+          document.getElementById('charImgBox').innerHTML = `<img src="${basic.character_image}" alt="${basic.character_name}" />`;
+        }
+
+        // 스탯 매핑
+        const statMap = {};
+        stat.final_stat?.forEach(s => { statMap[s.stat_name] = s.stat_value; });
+
+        document.getElementById('combatPower').textContent = Number(statMap['전투력'] || 0).toLocaleString();
+        document.getElementById('statMax').textContent = Number(statMap['스탯공격력'] || 0).toLocaleString();
+        document.getElementById('bossDmg').textContent = `${statMap['보스 몬스터 데미지'] || 0}%`;
+        document.getElementById('ignoreDef').textContent = `${statMap['방어율 무시'] || 0}%`;
+        document.getElementById('critDmg').textContent = `${statMap['크리티컬 데미지'] || 0}%`;
+        document.getElementById('forces').textContent = `${statMap['아케인포스'] || 0} / ${statMap['어센틱포스'] || 0}`;
+
+        const mainStatVal = Math.max(
+          Number(statMap['STR'] || 0),
+          Number(statMap['DEX'] || 0),
+          Number(statMap['INT'] || 0),
+          Number(statMap['LUK'] || 0),
+          Number(statMap['HP'] || 0)
+        );
+        document.getElementById('mainStat').textContent = mainStatVal.toLocaleString();
+
+        statusMsg.style.display = 'none';
+        resultCard.style.display = 'block';
+      } catch (err) {
+        statusMsg.style.display = 'block';
+        statusMsg.style.color = '#ff6b6b';
+        statusMsg.textContent = `[오류] ${err.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emag Maple - 스타포스 강화 계산기</title>
+  <style>
+    :root {
+      --bg-color: #121214;
+      --card-bg: #1e1e24;
+      --card-hover: #26262e;
+      --text-color: #e1e1e6;
+      --accent-color: #ff9800;
+      --desc-color: #a8a8b3;
+      --border-color: #29292e;
+      --input-bg: #141418;
+      --danger: #ff5252;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단 네비게이션 통일 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-btn {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      color: #fff;
+      border-color: var(--desc-color);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-color); }
+    .nav-links a.active { color: var(--accent-color); font-weight: 600; }
+
+    /* 메인 컨테이너 */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .header-area {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .header-area h1 { font-size: 2rem; margin-bottom: 8px; }
+    .header-area p { color: var(--desc-color); }
+
+    .calc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.88rem; color: var(--desc-color); margin-bottom: 6px; }
+    select, input {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    select:focus, input:focus { border-color: var(--accent-color); }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: var(--input-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    .check-item { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; cursor: pointer; }
+    .check-item input { width: auto; accent-color: var(--accent-color); }
+
+    .btn-calc {
+      width: 100%;
+      background: var(--accent-color);
+      border: none;
+      color: #121214;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-calc:hover { opacity: 0.9; }
+
+    .result-box {
+      display: none;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.95rem;
+    }
+    .result-item:last-child { border-bottom: none; }
+    .result-item .val { font-weight: 700; color: var(--accent-color); font-size: 1.05rem; }
+    .result-item .val.danger { color: var(--danger); }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="../index.html" class="nav-btn">⬅ Emag 메인</a>
+      <a href="index.html" class="nav-btn">🍁 메이플 홈</a>
+      <a href="index.html" class="logo">Emag Maple</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="header-area">
+      <h1>스타포스 강화 기댓값 계산기</h1>
+      <p>장비 레벨 및 이벤트 여부에 따른 기대 비용과 평균 파괴 횟수를 계산합니다.</p>
+    </div>
+
+    <div class="calc-card">
+      <div class="grid-3">
+        <div class="form-group">
+          <label>장비 레벨 제한</label>
+          <select id="itemLevel">
+            <option value="140">140제 (펜살리르 등)</option>
+            <option value="150">150제 (카루타)</option>
+            <option value="160" selected>160제 (앱솔랩스)</option>
+            <option value="200">200제 (아케인셰이드)</option>
+            <option value="250">250제 (에테르넬)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>현재 성수 (Star)</label>
+          <input type="number" id="startStar" value="0" min="0" max="24">
+        </div>
+        <div class="form-group">
+          <label>목표 성수 (Star)</label>
+          <input type="number" id="targetStar" value="22" min="1" max="25">
+        </div>
+      </div>
+
+      <div class="checkbox-group">
+        <label class="check-item"><input type="checkbox" id="chkCatch"> 스타캐치 (성공률 1.05배)</label>
+        <label class="check-item"><input type="checkbox" id="chkSunday"> 15&16 성 100% 이벤트</label>
+        <label class="check-item"><input type="checkbox" id="chkShining"> 샤이닝 스타포스 (30% 할인 + 15/16)</label>
+        <label class="check-item"><input type="checkbox" id="chkPrevent"> 15~16성 파괴방지 적용</label>
+      </div>
+
+      <button class="btn-calc" onclick="runSimulation()">기댓값 시뮬레이션 계산</button>
+
+      <div id="resultBox" class="result-box">
+        <div class="result-item">
+          <span>평균 기대 비용</span>
+          <span class="val" id="resMeso">0 억 메소</span>
+        </div>
+        <div class="result-item">
+          <span>평균 예상 파괴 횟수</span>
+          <span class="val danger" id="resDestroy">0 회</span>
+        </div>
+        <div class="result-item">
+          <span>평균 강화 시도 횟수</span>
+          <span class="val" id="resAttempts">0 회</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Monte Carlo Simulation 기반 기댓값 계산 | Emag Gaming Hub</p>
+  </footer>
+
+  <script>
+    function getCost(itemLevel, star, isPrevent, is30PercentOff) {
+      let cost = 0;
+      if (star < 10) {
+        cost = 1000 + Math.pow(itemLevel, 3) * (star + 1) / 25;
+      } else if (star < 15) {
+        cost = 1000 + Math.pow(itemLevel, 3) * Math.pow(star + 1, 2.7) / 400;
+      } else {
+        cost = 1000 + Math.pow(itemLevel, 3) * Math.pow(star + 1, 2.7) / 200;
+      }
+
+      if (isPrevent && (star === 15 || star === 16)) {
+        cost += 1000 + Math.pow(itemLevel, 3) * Math.pow(star + 1, 2.7) / 200;
+      }
+
+      if (is30PercentOff) {
+        cost *= 0.7;
+      }
+      return Math.round(cost);
+    }
+
+    function runSimulation() {
+      const itemLevel = parseInt(document.getElementById('itemLevel').value);
+      const startStar = parseInt(document.getElementById('startStar').value);
+      const targetStar = parseInt(document.getElementById('targetStar').value);
+      const starCatch = document.getElementById('chkCatch').checked;
+      const isSunday = document.getElementById('chkSunday').checked;
+      const isShining = document.getElementById('chkShining').checked;
+      const isPrevent = document.getElementById('chkPrevent').checked;
+
+      if (startStar >= targetStar) {
+        alert("목표 성수는 현재 성수보다 높아야 합니다.");
+        return;
+      }
+
+      const is1516 = isSunday || isShining;
+      const is30Off = isShining;
+
+      const TRIALS = 5000;
+      let totalCost = 0;
+      let totalDestroys = 0;
+      let totalAttempts = 0;
+
+      for (let t = 0; t < TRIALS; t++) {
+        let cur = startStar;
+        let chanceTime = false;
+        let failStreak = 0;
+
+        while (cur < targetStar) {
+          totalAttempts++;
+          const cost = getCost(itemLevel, cur, isPrevent, is30Off);
+          totalCost += cost;
+
+          if (chanceTime) {
+            cur++;
+            chanceTime = false;
+            failStreak = 0;
+            continue;
+          }
+
+          let successRate = 0;
+          let destroyRate = 0;
+
+          if (cur < 3) successRate = 0.95 - cur * 0.05;
+          else if (cur < 15) successRate = 1.0 - cur * 0.05;
+          else if (cur < 22) successRate = 0.30;
+          else if (cur === 22) successRate = 0.03;
+          else if (cur === 23) successRate = 0.02;
+          else successRate = 0.01;
+
+          if (is1516 && (cur === 5 || cur === 10 || cur === 15)) {
+            successRate = 1.0;
+          }
+
+          if (starCatch && successRate < 1.0) {
+            successRate *= 1.05;
+          }
+
+          if (cur >= 15 && cur <= 16 && isPrevent) {
+            destroyRate = 0;
+          } else if (cur >= 15 && cur <= 17) {
+            destroyRate = 0.021;
+          } else if (cur >= 18 && cur <= 19) {
+            destroyRate = 0.028;
+          } else if (cur >= 20 && cur <= 21) {
+            destroyRate = 0.07;
+          } else if (cur === 22) {
+            destroyRate = 0.194;
+          } else if (cur >= 23) {
+            destroyRate = 0.294;
+          }
+
+          const roll = Math.random();
+          if (roll < successRate) {
+            cur++;
+            failStreak = 0;
+          } else if (roll < successRate + destroyRate) {
+            totalDestroys++;
+            cur = 12;
+            failStreak = 0;
+          } else {
+            if (cur > 10 && cur !== 15 && cur !== 20) {
+              cur--;
+              failStreak++;
+              if (failStreak === 2) {
+                chanceTime = true;
+              }
+            }
+          }
+        }
+      }
+
+      const avgCost = totalCost / TRIALS;
+      const avgDestroys = totalDestroys / TRIALS;
+      const avgAttempts = totalAttempts / TRIALS;
+
+      document.getElementById('resMeso').innerText = (avgCost / 100000000).toFixed(2) + " 억 메소";
+      document.getElementById('resDestroy').innerText = avgDestroys.toFixed(2) + " 회";
+      document.getElementById('resAttempts').innerText = Math.round(avgAttempts).toLocaleString() + " 회";
+
+      document.getElementById('resultBox').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 메인 페이지 -->
+  <url>
+    <loc>https://emag01.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 메이플 허브 페이지 -->
+  <url>
+    <loc>https://emag01.com/maple/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 메이플 계산기 및 검색 페이지들 -->
+  <url>
+    <loc>https://emag01.com/maple/boss-calc.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag01.com/maple/search.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag01.com/maple/starforce-calc.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag01.com/maple/symbol-calc.html</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>

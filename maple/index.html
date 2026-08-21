@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emag MapleStory - 메이플스토리 유저 허브</title>
+  <style>
+    :root {
+      --bg-color: #121214;
+      --card-bg: #1e1e24;
+      --card-hover: #26262e;
+      --text-color: #e1e1e6;
+      --accent-color: #ff9800;
+      --accent-hover: #e68900;
+      --desc-color: #a8a8b3;
+      --border-color: #29292e;
+      --badge-bg: #332314;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 상단 네비게이션 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .back-home {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .back-home:hover {
+      color: #fff;
+      border-color: var(--desc-color);
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-color); }
+
+    /* 메인 컨테이너 */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+    .hero h1 span { color: var(--accent-color); }
+    .hero p { color: var(--desc-color); }
+
+    /* 메이플 공식 홈페이지 바로가기 배너 */
+    .official-banner {
+      background: linear-gradient(135deg, #2c1a0e, #1e1e24);
+      border: 1px solid var(--accent-color);
+      border-radius: 14px;
+      padding: 16px 24px;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .official-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.2);
+    }
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .banner-icon { font-size: 2rem; }
+    .banner-title { font-weight: 700; font-size: 1.05rem; }
+    .banner-desc { font-size: 0.85rem; color: var(--desc-color); }
+    .banner-btn {
+      background: var(--accent-color);
+      color: #121214;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    /* 서비스 카드 그리드 (4개 카드 2x2 배치) */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-color);
+      background: var(--card-hover);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      background: var(--badge-bg);
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+
+    .card-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .card-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .card-desc { font-size: 0.92rem; color: var(--desc-color); line-height: 1.5; margin-bottom: 24px; }
+    .card-action { color: var(--accent-color); font-size: 0.95rem; font-weight: 600; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo-group">
+      <a href="../index.html" class="back-home">⬅ Emag 메인</a>
+      <a href="index.html" class="logo">🍁 Emag MapleStory</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <h1>메이플 모험을 더 스마트하게, <span>Maple Hub</span></h1>
+      <p>실시간 캐릭터 스펙 조회부터 보스 수익, 심볼 및 스타포스 기댓값 계산기까지</p>
+    </section>
+
+    <a href="https://maplestory.nexon.com" target="_blank" rel="noopener noreferrer" class="official-banner">
+      <div class="banner-left">
+        <div class="banner-icon">🍁</div>
+        <div>
+          <div class="banner-title">메이플스토리 공식 홈페이지 바로가기</div>
+          <div class="banner-desc">최신 패치노트, 이벤트 및 캐시샵 공지 확인하러 가기</div>
+        </div>
+      </div>
+      <div class="banner-btn">메이플 하러가기 ➔</div>
+    </a>
+
+    <div class="card-grid">
+      <a href="search.html" class="service-card">
+        <div>
+          <span class="card-badge">OPEN API 연동</span>
+          <div class="card-icon">🔍</div>
+          <h2 class="card-title">캐릭터 정보 검색</h2>
+          <p class="card-desc">닉네임만 입력하면 전투력, 스탯, 착용 장비 및 세트 효과를 실시간으로 빠르게 조회합니다.</p>
+        </div>
+        <div class="card-action">조회하러 가기 ➔</div>
+      </a>
+
+      <a href="boss-calc.html" class="service-card">
+        <div>
+          <span class="card-badge">수익 최적화</span>
+          <div class="card-icon">💰</div>
+          <h2 class="card-title">보스 결정석 계산기</h2>
+          <p class="card-desc">주간 12개 한도 체크 및 월간 보스 파티 분배금까지 이번 주/이번 달 예상 메소 수익을 계산합니다.</p>
+        </div>
+        <div class="card-action">계산하러 가기 ➔</div>
+      </a>
+
+      <a href="symbol-calc.html" class="service-card">
+        <div>
+          <span class="card-badge">스펙업 분석</span>
+          <div class="card-icon">🔮</div>
+          <h2 class="card-title">심볼 레벨업 계산기</h2>
+          <p class="card-desc">아케인 및 어센틱 심볼의 목표 레벨까지 필요한 심볼 개수, 잔여 일수 및 소요 메소 비용을 계산합니다.</p>
+        </div>
+        <div class="card-action">계산하러 가기 ➔</div>
+      </a>
+
+      <a href="starforce-calc.html" class="service-card">
+        <div>
+          <span class="card-badge">강화 시뮬레이터</span>
+          <div class="card-icon">⭐</div>
+          <h2 class="card-title">스타포스 강화 계산기</h2>
+          <p class="card-desc">장비 레벨과 목표 성수에 따른 기대 비용, 파괴 횟수 및 썬데이/샤이닝 이벤트 할인율을 시뮬레이션합니다.</p>
+        </div>
+        <div class="card-action">계산하러 가기 ➔</div>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Data based on NEXON Open API | Designed for MapleStory Players</p>
+  </footer>
+
+</body>
+</html>
