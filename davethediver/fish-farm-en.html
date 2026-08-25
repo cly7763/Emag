@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R76KEE5TRM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-R76KEE5TRM');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-6397254392843786">
+  <title>Fish Farm Endgame Setup Guide - Dave the Diver | Emag</title>
+  <style>
+    :root {
+      --bg-color: #0a1118;
+      --card-bg: #121e2b;
+      --card-hover: #18293a;
+      --text-color: #f0f4f8;
+      --desc-color: #8da2b5;
+      --border-color: #1f3347;
+      --accent-dave: #00b4d8;
+      --accent-glow: rgba(0, 180, 216, 0.15);
+      --badge-bg: rgba(0, 180, 216, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent-dave); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    .lang-btn {
+      background: #18293a;
+      color: #fff;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .lang-btn:hover {
+      border-color: var(--accent-dave);
+      background: #1f3347;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: var(--accent-glow);
+      color: var(--accent-dave);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      border: 1px solid rgba(0, 180, 216, 0.3);
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .hero p {
+      color: var(--desc-color);
+      font-size: 1rem;
+    }
+
+    .farm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .farm-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .farm-card:hover {
+      border-color: var(--accent-dave);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .depth-tag {
+      font-size: 0.78rem;
+      background: var(--accent-glow);
+      color: var(--accent-dave);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .fish-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fish-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .fish-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .fish-count {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-dave);
+      background: var(--badge-bg);
+      padding: 3px 9px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 180, 216, 0.2);
+    }
+    .fish-count.full {
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index-en.html" class="logo">E<span>mag</span></a>
+    <div class="nav-links">
+      <a href="index-en.html">Tools Hub</a>
+      <a href="recipe-calc-en.html">Recipes</a>
+      <a href="staff-sim-en.html">Staff Guide</a>
+      <a href="fish-farm.html" class="lang-btn">🇰🇷 KOR</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div class="badge">FARMING GUIDE</div>
+      <h1>Fish Farm Endgame Setup Guide</h1>
+      <p>Optimal fish breeding setup by depth for maximum Bancho Sushi profit & reliable ingredients</p>
+    </section>
+
+    <div class="farm-grid">
+
+      <!-- 1. Entry Zone -->
+      <div class="farm-card">
+        <div class="card-header">
+          <div class="card-title">🌊 Blue Hole Shallows</div>
+          <span class="depth-tag">0~50m</span>
+        </div>
+        <ul class="fish-list">
+          <li class="fish-item">
+            <span class="fish-name">Whiteleg Shrimp</span>
+            <span class="fish-count">30~40</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Titan Triggerfish</span>
+            <span class="fish-count">20~30</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Striped Marlin</span>
+            <span class="fish-count">~10</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Bluefin Tuna</span>
+            <span class="fish-count">~10</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 2. Medium Depth -->
+      <div class="farm-card">
+        <div class="card-header">
+          <div class="card-title">🐠 Blue Hole Medium Depth</div>
+          <span class="depth-tag">50~130m</span>
+        </div>
+        <ul class="fish-list">
+          <li class="fish-item">
+            <span class="fish-name">Black Tiger Shrimp</span>
+            <span class="fish-count">30~40</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Clown Frogfish</span>
+            <span class="fish-count">30~40</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Cuttlefish</span>
+            <span class="fish-count">20~30</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Coral Trout</span>
+            <span class="fish-count">20~30</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Bluespotted Coral Trout</span>
+            <span class="fish-count">20~30</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 3. Deep Sea -->
+      <div class="farm-card">
+        <div class="card-header">
+          <div class="card-title">🌑 Blue Hole Depths</div>
+          <span class="depth-tag">130~250m</span>
+        </div>
+        <ul class="fish-list">
+          <li class="fish-item">
+            <span class="fish-name">Splendid Alfonsino</span>
+            <span class="fish-count">30~40</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Rhinochimaeridae</span>
+            <span class="fish-count">30~40</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 4. Glacier Passage -->
+      <div class="farm-card">
+        <div class="card-header">
+          <div class="card-title">❄️ Glacier Passage</div>
+          <span class="depth-tag">Passage Zone</span>
+        </div>
+        <ul class="fish-list">
+          <li class="fish-item">
+            <span class="fish-name">Vampire Squid</span>
+            <span class="fish-count">20~30</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Peacock Squid</span>
+            <span class="fish-count">20~30</span>
+          </li>
+          <li class="fish-item">
+            <span class="fish-name">Dumbo Octopus</span>
+            <span class="fish-count">20~30</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 5. Glacier Area -->
+      <div class="farm-card">
+        <div class="card-header">
+          <div class="card-title">🧊 Glacier Area</div>
+          <span class="depth-tag">Glacier Zone</span>
+        </div>
+        <ul class="fish-list">
+          <li class="fish-item">
+            <span class="fish-name">Capelin</span>
+            <span class="fish-count full">Keep 80~90% Density</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 6. Hydrothermal Vents -->
+      <div class="farm-card">
+        <div class="card-header">
+          <div class="card-title">🌋 Hydrothermal Vents</div>
+          <span class="depth-tag">Deep Vents</span>
+        </div>
+        <ul class="fish-list">
+          <li class="fish-item">
+            <span class="fish-name">Waptia Fieldensis</span>
+            <span class="fish-count full">Keep 80~90% Density</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© Emag Gaming Hub & Blog. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
