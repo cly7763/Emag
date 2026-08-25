@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R76KEE5TRM"></script>
@@ -13,23 +13,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-adsense-account" content="ca-pub-6397254392843786">
-  <title>데이브 더 다이버 허브 - Emag</title>
+  <title>Dave the Diver Hub - Emag</title>
   <style>
-    .lang-btn {
-      background: #18293a;
-      color: #fff;
-      border: 1px solid var(--border-color);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .lang-btn:hover {
-      border-color: var(--accent-dave);
-      background: #1f3347;
-    }
     :root {
       --bg-color: #0a1118;
       --card-bg: #121e2b;
@@ -70,6 +55,7 @@
     .logo span { color: var(--accent-dave); }
     .nav-links {
       display: flex;
+      align-items: center;
       gap: 20px;
     }
     .nav-links a {
@@ -79,6 +65,15 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: #fff; }
+    .lang-btn {
+      background: #18293a;
+      color: #fff;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
 
     .container {
       max-width: 1000px;
@@ -197,48 +192,46 @@
 </head>
 <body>
 
-<nav>
+  <nav>
     <a href="../index.html" class="logo">E<span>mag</span></a>
     <div class="nav-links">
-      <a href="../index.html">홈으로</a>
-      <a href="../maple/index.html">메이플 허브</a>
-      <!-- 영문 허브로 이동 -->
-      <a href="index-en.html" class="lang-btn">🇺🇸 ENG</a>
+      <a href="../index.html">Home</a>
+      <a href="index.html" class="lang-btn">🇰🇷 KOR</a>
     </div>
-  </nav>>
+  </nav>
 
   <main class="container">
     <section class="hero">
       <div class="badge">DAVE THE DIVER TOOLS</div>
-      <h1>데이브 더 다이버 종합 도구함</h1>
-      <p>블루홀 탐사와 반초스시 경영을 완벽하게 서포트하는 유틸리티 모음</p>
+      <h1>Dave the Diver Utility Hub</h1>
+      <p>Interactive databases and guides to optimize Bancho Sushi & Blue Hole exploration</p>
     </section>
 
-    <div class="section-title">주요 데이터베이스 & 가이드</div>
+    <div class="section-title">Databases & Guides</div>
     <div class="calc-grid">
       
-      <!-- 1. 10레벨 종결 요리 수익 DB -->
-      <a href="recipe-calc.html" class="calc-card">
+      <!-- 1. Max Lv.10 Dish Database -->
+      <a href="recipe-calc-en.html" class="calc-card">
         <div>
           <div class="calc-icon">🍣</div>
-          <h2 class="calc-title">10레벨 종결 요리 수익</h2>
-          <p class="calc-desc">반초스시 최고 효율 10레벨(만렙) 요리의 판매 가격, 서빙 그릇 수, 총 매출 및 재료 파밍 위치·해금 조건을 확인하세요.</p>
+          <h2 class="calc-title">Max Lv.10 Dish Revenue DB</h2>
+          <p class="calc-desc">Check max level (Lv.10) selling prices, serving plates, total revenue, ingredients, and unlock requirements for all main dishes.</p>
         </div>
         <div class="card-footer">
-          <span>열기</span>
+          <span>Open Database</span>
           <span>➔</span>
         </div>
       </a>
 
-      <!-- 2. 직원 스탯 & 스킬 도감 -->
-      <a href="staff-sim.html" class="calc-card">
+      <!-- 2. Staff Stats & Skills Guide -->
+      <a href="staff-sim-en.html" class="calc-card">
         <div>
           <div class="calc-icon">👨‍🍳</div>
-          <h2 class="calc-title">직원 스탯 & 스킬 도감</h2>
-          <p class="calc-desc">21명 전체 직원의 20레벨 만렙 스탯, 3/7레벨 고유 스킬 상세 효과, 해금 요리 및 본점·분점 종결 추천 프리셋을 확인하세요.</p>
+          <h2 class="calc-title">Staff Stats & Skills Guide</h2>
+          <p class="calc-desc">Explore Lv.20 max stats for all 21 employees, Lv.3/7 unique skills, unlocked recipes, and optimal main/branch presets.</p>
         </div>
         <div class="card-footer">
-          <span>도감 보러가기</span>
+          <span>Open Guide</span>
           <span>➔</span>
         </div>
       </a>

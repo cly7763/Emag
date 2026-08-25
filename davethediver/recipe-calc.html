@@ -318,15 +318,32 @@
       background: var(--card-bg);
       margin-top: 50px;
     }
+    .lang-btn {
+      background: #18293a;
+      color: #fff;
+      border: 1px solid var(--border-color);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .lang-btn:hover {
+      border-color: var(--accent-dave);
+      background: #1f3347;
+    }
   </style>
 </head>
 <body>
 
-  <nav>
+<nav>
     <a href="../index.html" class="logo">E<span>mag</span></a>
     <div class="nav-links">
       <a href="../index.html">홈으로</a>
       <a href="index.html">데이브 허브</a>
+      <!-- 영문 요리 DB로 이동 -->
+      <a href="recipe-calc-en.html" class="lang-btn">🇺🇸 ENG</a>
     </div>
   </nav>
 
