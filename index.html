@@ -23,6 +23,7 @@
       --desc-color: #9c9ca8;
       --border-color: #2a2a32;
       --accent-maple: #ff9800;
+      --accent-dave: #00b4d8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -137,6 +138,7 @@
     }
 
     .game-card.maple:hover { border-color: var(--accent-maple); }
+    .game-card.dave:hover { border-color: var(--accent-dave); }
 
     .game-icon {
       font-size: 2.8rem;
@@ -178,6 +180,10 @@
       color: var(--accent-maple);
       border-top: 1px solid var(--border-color);
       padding-top: 14px;
+    }
+
+    .game-card.dave .card-footer {
+      color: var(--accent-dave);
     }
 
     /* 준비 중 카드 스타일 */
@@ -241,6 +247,7 @@
     <div class="section-title">게임별 허브 & 유틸리티</div>
     <div class="game-grid">
       
+      <!-- 메이플스토리 허브 -->
       <a href="maple/index.html" class="game-card maple">
         <div>
           <div class="game-icon">🍁</div>
@@ -259,6 +266,26 @@
         </div>
       </a>
 
+      <!-- 데이브 더 다이버 허브 -->
+      <a href="davethediver/index.html" class="game-card dave">
+        <div>
+          <div class="game-icon">🤿</div>
+          <h2 class="game-title">데이브 더 다이버 (Dave the Diver)</h2>
+          <p class="game-desc">초밥집 메뉴 수익 최적화 계산기, 직원 종결 배치 시뮬레이터, 축제 파티 맞춤 레시피 DB를 제공합니다.</p>
+          <div class="tag-list">
+            <span class="tag">초밥 수익 계산기</span>
+            <span class="tag">축제 메뉴 추천</span>
+            <span class="tag">직원 최적 배치</span>
+            <span class="tag">어종 DB</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>데이브 허브 입장하기</span>
+          <span>➔</span>
+        </div>
+      </a>
+
+      <!-- 추가 준비 중 카드 -->
       <div class="game-card disabled">
         <div>
           <div class="game-icon">⏳</div>
@@ -280,6 +307,10 @@
 
     <div class="section-title" id="blog">Emag 최신 게임 팁 & 소식</div>
     <div class="post-list">
+      <a href="davethediver/index.html" class="post-item">
+        <div class="post-title">[데이브] 초밥집 최고 수익 레시피 & 직원 배치 시뮬레이터 허브 오픈</div>
+        <div class="post-date">2026.08.25</div>
+      </a>
       <a href="maple/index.html" class="post-item">
         <div class="post-title">[메이플] 넥슨 Open API 캐릭터 검색, 보스 결정석, 심볼 및 스타포스 계산기 정식 오픈</div>
         <div class="post-date">2026.08.20</div>

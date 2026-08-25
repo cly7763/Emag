@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R76KEE5TRM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R76KEE5TRM');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-6397254392843786">
+  <title>10레벨 종결 요리 & 레시피 DB - 데이브 더 다이버 | Emag</title>
+  <style>
+    :root {
+      --bg-color: #0a1118;
+      --card-bg: #121e2b;
+      --card-hover: #18293a;
+      --text-color: #f0f4f8;
+      --desc-color: #8da2b5;
+      --border-color: #1f3347;
+      --accent-dave: #00b4d8;
+      --accent-gold: #ffd166;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent-dave); }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--desc-color);
+      margin-bottom: 16px;
+    }
+    .breadcrumb a {
+      color: var(--desc-color);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover { color: #fff; }
+
+    .header-section {
+      margin-bottom: 30px;
+    }
+    .header-section h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-section p {
+      color: var(--desc-color);
+      font-size: 0.98rem;
+    }
+
+    .control-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .filter-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--desc-color);
+      min-width: 70px;
+    }
+
+    .party-btn {
+      background: #18293a;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 13px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .party-btn:hover { border-color: var(--accent-dave); }
+    .party-btn.active {
+      background: var(--accent-dave);
+      color: #041421;
+      font-weight: 700;
+      border-color: var(--accent-dave);
+    }
+
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 240px;
+      background: #0d1622;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--accent-dave); }
+
+    .select-box {
+      background: #0d1622;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    .recipe-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .recipe-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 180, 216, 0.4);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .recipe-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .party-tag {
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(0, 180, 216, 0.15);
+      color: var(--accent-dave);
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      white-space: nowrap;
+    }
+
+    .unlock-condition {
+      font-size: 0.8rem;
+      color: #8da2b5;
+      margin-bottom: 12px;
+    }
+    .unlock-condition span {
+      color: #ffd166;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .stat-box {
+      background: #172433;
+      border-radius: 8px;
+      padding: 9px 6px;
+    }
+    .stat-title {
+      font-size: 0.75rem;
+      color: var(--desc-color);
+      margin-bottom: 2px;
+    }
+    .stat-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .stat-value.gold { color: var(--accent-gold); }
+    .stat-value.servings { color: #fff; }
+
+    .total-yield-banner {
+      background: rgba(255, 209, 102, 0.08);
+      border: 1px solid rgba(255, 209, 102, 0.2);
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+    .total-yield-title { color: #ffd166; font-weight: 600; }
+    .total-yield-val { color: #fff; font-weight: 800; font-size: 1rem; }
+
+    .ingredients-box {
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+    }
+    .ing-title {
+      font-size: 0.78rem;
+      color: var(--desc-color);
+      margin-bottom: 6px;
+    }
+    .ing-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.82rem;
+    }
+    .ing-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #c9d6df;
+    }
+    .ing-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ing-loc {
+      font-size: 0.7rem;
+      color: #8da2b5;
+      background: #0d1622;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .ing-count {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--desc-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="logo">E<span>mag</span></a>
+    <div class="nav-links">
+      <a href="../index.html">홈으로</a>
+      <a href="index.html">데이브 허브</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">홈</a> &gt; <a href="index.html">데이브 더 다이버 허브</a> &gt; <span>10레벨 종결 요리 DB</span>
+    </div>
+
+    <header class="header-section">
+      <h1>🍣 10레벨(만렙) 메인 디시 전체 DB</h1>
+      <p>반초스시 모든 메인 요리의 10레벨 판매가, 서빙 접시수, 총 매출, 해금 조건 및 재료를 확인하세요.</p>
+    </header>
+
+    <section class="control-panel">
+      <div class="filter-group">
+        <span class="filter-label">분류/축제:</span>
+        <button class="party-btn active" data-party="ALL">전체</button>
+        <button class="party-btn" data-party="직원 레벨업">직원 해금 👨‍🍳</button>
+        <button class="party-btn" data-party="배틀/VIP">배틀 & VIP 🏆</button>
+        <button class="party-btn" data-party="쿡스타 해금">쿡스타 등급 🌟</button>
+        <button class="party-btn" data-party="오이">오이 축제 🥒</button>
+        <button class="party-btn" data-party="참치">참치 축제 🐟</button>
+        <button class="party-btn" data-party="청새치">청새치 축제 🗡️</button>
+        <button class="party-btn" data-party="카레">카레 축제 🍛</button>
+        <button class="party-btn" data-party="새우">새우 축제 🦐</button>
+      </div>
+
+      <div class="search-row">
+        <input type="text" id="searchInput" class="search-input" placeholder="요리명, 재료, 해금 조건 검색 (예: 덤보, 오징어, 빌리, 파스타...)">
+        <select id="sortSelect" class="select-box">
+          <option value="maxGold">10Lv 판매가 높은순</option>
+          <option value="totalRevenue">1회 총매출(단가×접시) 높은순</option>
+          <option value="servings">접시수 많은순</option>
+          <option value="name">이름순</option>
+        </select>
+      </div>
+    </section>
+
+    <div id="recipeGrid" class="recipe-grid"></div>
+  </main>
+
+  <footer>
+    <p>© Emag Gaming Hub & Blog. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 제공된 6장의 시트 기반 10레벨 전체 메인 디시 데이터
+    const RECIPES = [
+      {
+        id: "bigeye_trevally_canapes",
+        name: "큰꼬치고기 카나베",
+        unlock: "쿡스타 다이아 해금",
+        category: "쿡스타 해금",
+        maxGold: 1572,
+        servings: 6,
+        ingredients: [
+          { name: "큰눈치고기", loc: "어종", count: 3 },
+          { name: "방울토마토", loc: "농장", count: 2 },
+          { name: "양파", loc: "농장", count: 2 },
+          { name: "마요네즈", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "sailfish_seaweed_stew",
+        name: "돛새치 해초조림",
+        unlock: "청새치 축제 시작",
+        category: "청새치",
+        maxGold: 1572,
+        servings: 9,
+        ingredients: [
+          { name: "돛새치 살점", loc: "어종", count: 3 },
+          { name: "해초", loc: "해초", count: 2 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "waptia_fieldensis_salad",
+        name: "왑티아 필덴시스 초무침",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1572,
+        servings: 7,
+        ingredients: [
+          { name: "왑티아 필덴시스", loc: "어종", count: 3 },
+          { name: "오이", loc: "농장", count: 2 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "dumbo_takoyaki",
+        name: "덤보 타코야끼",
+        unlock: "쿡스타 다이아 해금",
+        category: "쿡스타 해금",
+        maxGold: 1554,
+        servings: 9,
+        ingredients: [
+          { name: "덤보문어", loc: "어종", count: 3 },
+          { name: "밀", loc: "농장", count: 2 },
+          { name: "마요네즈", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "pharcatus_soybean_paste_soup",
+        name: "팔카투스 된장국",
+        unlock: "열수분출 지역 방문",
+        category: "배틀/VIP",
+        maxGold: 1554,
+        servings: 7,
+        ingredients: [
+          { name: "팔카투스", loc: "어종", count: 3 },
+          { name: "미역", loc: "해초", count: 3 },
+          { name: "미소된장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "pikaia_ramen",
+        name: "피카이아 라멘",
+        unlock: "열수분출 지역 방문",
+        category: "배틀/VIP",
+        maxGold: 1554,
+        servings: 10,
+        ingredients: [
+          { name: "피카이아", loc: "어종", count: 3 },
+          { name: "밀", loc: "농장", count: 2 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "humboldt_squid_ink_pasta",
+        name: "훔볼트 먹물 파스타",
+        unlock: "파스타 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1554,
+        servings: 10,
+        ingredients: [
+          { name: "훔볼트오징어", loc: "어종", count: 1 },
+          { name: "밀", loc: "농장", count: 3 },
+          { name: "마늘", loc: "농장", count: 3 }
+        ]
+      },
+      {
+        id: "eggplant_dengaku",
+        name: "나스 덴카쿠",
+        unlock: "쿡스타 다이아 해금",
+        category: "쿡스타 해금",
+        maxGold: 1535,
+        servings: 4,
+        ingredients: [
+          { name: "가지", loc: "농장", count: 1 },
+          { name: "마늘", loc: "농장", count: 1 },
+          { name: "미소된장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "giant_spider_crab_rice_bowl",
+        name: "키다리게 덮밥",
+        unlock: "쿡스타 다이아 해금",
+        category: "쿡스타 해금",
+        maxGold: 1517,
+        servings: 7,
+        ingredients: [
+          { name: "키다리게", loc: "어종", count: 1 },
+          { name: "백미", loc: "농장", count: 2 },
+          { name: "콩", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "peacock_squid_ripieni",
+        name: "공작오징어 리피에니",
+        unlock: "파스타 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1517,
+        servings: 7,
+        ingredients: [
+          { name: "공작오징어", loc: "어종", count: 3 },
+          { name: "방울토마토", loc: "농장", count: 2 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "polar_cod_risotto",
+        name: "극지대구 리조토",
+        unlock: "파스타 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1509,
+        servings: 9,
+        ingredients: [
+          { name: "극지대구", loc: "어종", count: 3 },
+          { name: "백미", loc: "농장", count: 2 },
+          { name: "마늘", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "haddock_acqua_pazza",
+        name: "해덕대구 아쿠아파짜",
+        unlock: "파스타 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1498,
+        servings: 9,
+        ingredients: [
+          { name: "해덕대구", loc: "어종", count: 3 },
+          { name: "방울토마토", loc: "농장", count: 2 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "antarctic_octopus_carpaccio",
+        name: "남극문어 카르파초",
+        unlock: "파스타 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1498,
+        servings: 7,
+        ingredients: [
+          { name: "남극문어", loc: "어종", count: 3 },
+          { name: "양파", loc: "농장", count: 2 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "live_oyakodon",
+        name: "활치 오야코동",
+        unlock: "미첼 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 7,
+        ingredients: [
+          { name: "원반제비활치", loc: "어종", count: 5 },
+          { name: "활치", loc: "어종", count: 5 },
+          { name: "계란", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "moray_eel_steak",
+        name: "머구리농어 스테이크",
+        unlock: "엘 니뇨 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 7,
+        ingredients: [
+          { name: "머구리농어", loc: "어종", count: 5 },
+          { name: "마늘", loc: "농장", count: 3 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "sea_horse_seaweed_salad",
+        name: "해마해초 샐러드",
+        unlock: "요네 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 6,
+        ingredients: [
+          { name: "해마", loc: "어종", count: 3 },
+          { name: "방울토마토", loc: "농장", count: 2 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "jack_mackerel_nanbanzuke",
+        name: "전쟁이 난반즈케",
+        unlock: "마키 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 7,
+        ingredients: [
+          { name: "흑점줄전쟁이", loc: "어종", count: 5 },
+          { name: "양파", loc: "농장", count: 3 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "whiteleg_shrimp_rice_bowl",
+        name: "흰보리새우 덮밥",
+        unlock: "쿄코 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "흰보리새우", loc: "어종", count: 3 },
+          { name: "계란", loc: "농장", count: 2 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "jellyfish_salad",
+        name: "해파리 무침",
+        unlock: "제임스 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 6,
+        ingredients: [
+          { name: "달걀프라이해파리", loc: "어종", count: 5 },
+          { name: "마늘", loc: "농장", count: 2 },
+          { name: "검은산초", loc: "조미료", count: 2 }
+        ]
+      },
+      {
+        id: "spider_crab_curry",
+        name: "키다리게 커리",
+        unlock: "찰리 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "키다리게", loc: "어종", count: 1 },
+          { name: "강황", loc: "농장", count: 1 },
+          { name: "카레블럭", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "tricolor_squid_roast",
+        name: "삼색오징어구이",
+        unlock: "리우 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 12,
+        ingredients: [
+          { name: "공작오징어", loc: "빙하 통로", count: 3 },
+          { name: "흡혈오징어", loc: "빙하 통로", count: 3 },
+          { name: "갑오징어", loc: "50-130m", count: 3 },
+          { name: "소금", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "crimson_fish_roll",
+        name: "다홍빛 생선 롤",
+        unlock: "빌리 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "무당씬벵이", loc: "어종", count: 3 },
+          { name: "금눈돔", loc: "어종", count: 3 },
+          { name: "코은상어", loc: "어종", count: 3 }
+        ]
+      },
+      {
+        id: "batoid_skate_soup",
+        name: "카오리포",
+        unlock: "카롤리나 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 12,
+        ingredients: [
+          { name: "짱뚱어", loc: "어종", count: 3 },
+          { name: "마름천가오리", loc: "어종", count: 3 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "seaweed_egg_roll",
+        name: "해초 계란말이",
+        unlock: "파이 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "1등급달걀", loc: "농장", count: 1 },
+          { name: "미역", loc: "해초", count: 3 },
+          { name: "다시마", loc: "해초", count: 3 }
+        ]
+      },
+      {
+        id: "wrasse_curry",
+        name: "놀래기 커리",
+        unlock: "잔디 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 6,
+        ingredients: [
+          { name: "무지개놀래기", loc: "어종", count: 5 },
+          { name: "오래놀래기", loc: "어종", count: 5 },
+          { name: "카레블럭", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "eggplant_shrimp_dumpling",
+        name: "가지 새우완자 튀김",
+        unlock: "유스케 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 7,
+        ingredients: [
+          { name: "가시발바닷가재", loc: "어종", count: 3 },
+          { name: "가지", loc: "농장", count: 3 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "tropical_fish_garlic_roast",
+        name: "열대어 마늘구이",
+        unlock: "토호쿠 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "흰동가리", loc: "어종", count: 5 },
+          { name: "블루탱", loc: "어종", count: 5 },
+          { name: "마늘", loc: "농장", count: 3 }
+        ]
+      },
+      {
+        id: "shark_karaage",
+        name: "상어 가라아게",
+        unlock: "이츠키 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "흑기흉상어", loc: "어종", count: 3 },
+          { name: "백기흉상어", loc: "어종", count: 3 },
+          { name: "마요네즈", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "thresher_shark_stew",
+        name: "비악상어 조림",
+        unlock: "라울 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 7,
+        ingredients: [
+          { name: "비악상어", loc: "어종", count: 3 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "grape_egg_rice_bowl",
+        name: "바다포도 계란덮밥",
+        unlock: "마사요시 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "계란", loc: "농장", count: 2 },
+          { name: "바다포도", loc: "해초", count: 2 },
+          { name: "백미", loc: "농장", count: 3 }
+        ]
+      },
+      {
+        id: "monkfish_miso_soup",
+        name: "일각고래 미소된장국",
+        unlock: "다비나 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 12,
+        ingredients: [
+          { name: "일각고래", loc: "어종", count: 3 },
+          { name: "가지", loc: "농장", count: 2 },
+          { name: "미소된장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "garfish_hotdog",
+        name: "풀가사리 핫도그",
+        unlock: "코카니지 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 6,
+        ingredients: [
+          { name: "풀가사리", loc: "어종", count: 5 },
+          { name: "밀", loc: "농장", count: 2 },
+          { name: "마요네즈", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "cuttlefish_onion_ring",
+        name: "갑오징어 어니언링",
+        unlock: "랩터 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 7,
+        ingredients: [
+          { name: "갑오징어", loc: "어종", count: 5 },
+          { name: "양파", loc: "농장", count: 3 },
+          { name: "소금", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "icefish_curry",
+        name: "아이스피쉬 커리",
+        unlock: "드레 15레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1480,
+        servings: 9,
+        ingredients: [
+          { name: "아이스피쉬", loc: "어종", count: 5 },
+          { name: "콩", loc: "농장", count: 2 },
+          { name: "카레블럭", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "deep_sea_tempura",
+        name: "심해어 덴뿌라",
+        unlock: "튀김 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1461,
+        servings: 7,
+        ingredients: [
+          { name: "쿠키커터상어", loc: "어종", count: 1 },
+          { name: "블롭피쉬", loc: "어종", count: 1 },
+          { name: "흡혈오징어", loc: "어종", count: 1 }
+        ]
+      },
+      {
+        id: "lionfish_fry",
+        name: "쏠배감펭 튀김",
+        unlock: "코카니지 10레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1443,
+        servings: 4,
+        ingredients: [
+          { name: "점쏠배감펭", loc: "어종", count: 5 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "morwong_roast",
+        name: "열빙어 구이",
+        unlock: "드레 10레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1443,
+        servings: 7,
+        ingredients: [
+          { name: "열빙어", loc: "어종", count: 5 },
+          { name: "소금", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "tomato_cutlassfish_stirfry",
+        name: "토마토 꼼치 볶음",
+        unlock: "중화요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1443,
+        servings: 12,
+        ingredients: [
+          { name: "분홍꼼치", loc: "어종", count: 3 },
+          { name: "방울토마토", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "bluefin_trevally_sweet_sour",
+        name: "푸렁통구멍 탕수어",
+        unlock: "중화요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1443,
+        servings: 6,
+        ingredients: [
+          { name: "푸렁통구멍", loc: "어종", count: 1 },
+          { name: "당근", loc: "농장", count: 1 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "grouper_sandwich",
+        name: "콤버 샌드위치",
+        unlock: "튀김 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1443,
+        servings: 6,
+        ingredients: [
+          { name: "콤버", loc: "어종", count: 5 },
+          { name: "밀", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "spanish_mackerel_arancini",
+        name: "동갈삼치 아란치니",
+        unlock: "파스타 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1443,
+        servings: 7,
+        ingredients: [
+          { name: "동갈삼치", loc: "어종", count: 5 },
+          { name: "백미", loc: "농장", count: 2 },
+          { name: "마늘", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "smoked_mackerel_scramble",
+        name: "훈제 대서양고등어 스크램블",
+        unlock: "튀김 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1431,
+        servings: 6,
+        ingredients: [
+          { name: "대서양고등어", loc: "어종", count: 5 },
+          { name: "계란", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "sailfish_vinegar_stew",
+        name: "비늘돔 흑식초 조림",
+        unlock: "쿡스타 플래티넘 해금",
+        category: "쿡스타 해금",
+        maxGold: 1424,
+        servings: 6,
+        ingredients: [
+          { name: "지중해비늘돔", loc: "어종", count: 5 },
+          { name: "당근", loc: "농장", count: 2 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "purple_sea_urchin_rice_bowl",
+        name: "보라성게 덮밥",
+        unlock: "랩터 10레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1424,
+        servings: 4,
+        ingredients: [
+          { name: "보라성게", loc: "어종", count: 5 },
+          { name: "백미", loc: "농장", count: 2 },
+          { name: "참깨", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "galapagos_red_crab_fried_rice",
+        name: "갈라파고스붉은게 볶음밥",
+        unlock: "중화요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1424,
+        servings: 10,
+        ingredients: [
+          { name: "갈라파고스붉은게", loc: "어종", count: 2 },
+          { name: "1등급달걀", loc: "농장", count: 1 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "stingray_pie",
+        name: "쏠종개 파이",
+        unlock: "튀김 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1424,
+        servings: 7,
+        ingredients: [
+          { name: "쏠종개", loc: "어종", count: 5 },
+          { name: "밀", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "atlantic_bonito_curry",
+        name: "대서양보니토 커리",
+        unlock: "쿡스타 플래티넘 해금",
+        category: "카레",
+        maxGold: 1406,
+        servings: 7,
+        ingredients: [
+          { name: "대서양보니토", loc: "50-130m", count: 5 },
+          { name: "당근", loc: "농장", count: 2 },
+          { name: "카레블럭", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "shrimp_tempura_special_sushi",
+        name: "새우튀김 특초밥",
+        unlock: "드레 5레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 1406,
+        servings: 1,
+        ingredients: [
+          { name: "블랙타이거새우", loc: "어종", count: 2 },
+          { name: "백미", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "tomato_egg_soup",
+        name: "토마토 계란탕",
+        unlock: "중화요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1406,
+        servings: 12,
+        ingredients: [
+          { name: "1등급달걀", loc: "농장", count: 2 },
+          { name: "방울토마토", loc: "농장", count: 2 },
+          { name: "후추", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "blue_marlin_soybean_paste_roast",
+        name: "청새치 된장구이",
+        unlock: "청새치 축제 시작",
+        category: "청새치",
+        maxGold: 1406,
+        servings: 9,
+        ingredients: [
+          { name: "청새치 살점", loc: "어종", count: 3 },
+          { name: "마늘", loc: "농장", count: 2 },
+          { name: "미소된장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "vegetable_sushi",
+        name: "채소 초밥",
+        unlock: "MC 새미 방문",
+        category: "배틀/VIP",
+        maxGold: 1387,
+        servings: 1,
+        ingredients: [
+          { name: "당근", loc: "농장", count: 1 },
+          { name: "가지", loc: "농장", count: 1 },
+          { name: "백미", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "sea_horse_udon",
+        name: "해마 우동",
+        unlock: "쿡스타 플래티넘 해금",
+        category: "쿡스타 해금",
+        maxGold: 1387,
+        servings: 4,
+        ingredients: [
+          { name: "해마", loc: "어종", count: 3 },
+          { name: "밀", loc: "농장", count: 2 },
+          { name: "미소된장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "butterflyfish_curry",
+        name: "버팔로피쉬 커리",
+        unlock: "쿡스타 플래티넘 해금",
+        category: "쿡스타 해금",
+        maxGold: 1387,
+        servings: 6,
+        ingredients: [
+          { name: "버팔로피쉬", loc: "어종", count: 5 },
+          { name: "양파", loc: "농장", count: 2 },
+          { name: "강황", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "splendid_sushi_set",
+        name: "화려한 특초밥 세트",
+        unlock: "마이클 방 방문",
+        category: "배틀/VIP",
+        maxGold: 1387,
+        servings: 9,
+        ingredients: [
+          { name: "타이탄트리거피쉬", loc: "0-50m", count: 3 },
+          { name: "청줄바리", loc: "50-130m", count: 3 },
+          { name: "무늬바리", loc: "50-130m", count: 3 },
+          { name: "백미", loc: "농장", count: 3 }
+        ]
+      },
+      {
+        id: "blobfish_spring_roll",
+        name: "블롭피쉬 춘권",
+        unlock: "중화요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1387,
+        servings: 10,
+        ingredients: [
+          { name: "블롭피쉬", loc: "어종", count: 3 },
+          { name: "양파", loc: "농장", count: 2 },
+          { name: "참깨", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "menbosha",
+        name: "멘보샤",
+        unlock: "중화요리 배틀 후",
+        category: "새우",
+        maxGold: 1387,
+        servings: 10,
+        ingredients: [
+          { name: "블랙타이거새우", loc: "50-130m", count: 5 },
+          { name: "흰다리새우", loc: "0-50m", count: 5 },
+          { name: "밀", loc: "농장", count: 2 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "pelican_eel_jelly",
+        name: "펠리칸장어 젤리",
+        unlock: "튀김 요리 배틀 후",
+        category: "배틀/VIP",
+        maxGold: 1380,
+        servings: 9,
+        ingredients: [
+          { name: "펠리칸장어", loc: "어종", count: 1 },
+          { name: "우뭇가사리", loc: "해초", count: 1 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "maguro_don",
+        name: "마구로동",
+        unlock: "참치 축제 시작",
+        category: "참치",
+        maxGold: 1332,
+        servings: 9,
+        ingredients: [
+          { name: "참다랑어 붉은살", loc: "어종", count: 3 },
+          { name: "백미", loc: "농장", count: 2 },
+          { name: "참기름", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "spider_crab_cucumber_sushi",
+        name: "키다리게 오이 초밥",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1198,
+        servings: 1,
+        ingredients: [
+          { name: "키다리게", loc: "어종", count: 1 },
+          { name: "오이", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "frogfish_cucumber_gunkan",
+        name: "점씬벵이 오이 군함 초밥",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1184,
+        servings: 1,
+        ingredients: [
+          { name: "점씬벵이", loc: "어종", count: 1 },
+          { name: "오이", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "cucumber_skewer",
+        name: "오이꼬치",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1184,
+        servings: 1,
+        ingredients: [
+          { name: "오이", loc: "농장", count: 3 }
+        ]
+      },
+      {
+        id: "pickled_vegetables",
+        name: "채소절임",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1169,
+        servings: 3,
+        ingredients: [
+          { name: "오이", loc: "농장", count: 1 },
+          { name: "양파", loc: "농장", count: 1 },
+          { name: "당근", loc: "농장", count: 1 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "scad_sandwich",
+        name: "전쟁이 샌드",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1154,
+        servings: 7,
+        ingredients: [
+          { name: "줄전쟁이", loc: "어종", count: 5 },
+          { name: "오이", loc: "농장", count: 2 }
+        ]
+      },
+      {
+        id: "vegetable_tempura",
+        name: "채소튀김",
+        unlock: "오이 축제 시작",
+        category: "오이",
+        maxGold: 1154,
+        servings: 3,
+        ingredients: [
+          { name: "오이", loc: "농장", count: 1 },
+          { name: "양파", loc: "농장", count: 1 },
+          { name: "당근", loc: "농장", count: 1 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "yellowfin_tuna_steak",
+        name: "황다랑어 스테이크",
+        unlock: "참치 축제 시작",
+        category: "참치",
+        maxGold: 1128,
+        servings: 9,
+        ingredients: [
+          { name: "황다랑어 중뱃살", loc: "어종", count: 3 },
+          { name: "방울토마토", loc: "농장", count: 3 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "hawaiian_poke",
+        name: "하와이안 포케",
+        unlock: "참치 축제 시작",
+        category: "참치",
+        maxGold: 980,
+        servings: 9,
+        ingredients: [
+          { name: "황다랑어 붉은살", loc: "어종", count: 3 },
+          { name: "백미", loc: "농장", count: 3 },
+          { name: "마요네즈", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "white_spotted_shrimp_tempura",
+        name: "흰다리자숙새우 튀김",
+        unlock: "랩터 5레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 832,
+        servings: 10,
+        ingredients: [
+          { name: "흰다리새우", loc: "어종", count: 5 },
+          { name: "밀", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "sea_grape_jellyfish_sushi",
+        name: "바다포도 해파리 초밥",
+        unlock: "빈센트 방문",
+        category: "배틀/VIP",
+        maxGold: 832,
+        servings: 1,
+        ingredients: [
+          { name: "흰점박이해파리", loc: "어종", count: 1 },
+          { name: "바다포도", loc: "해초", count: 1 },
+          { name: "소금", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "pufferfish_special_sushi",
+        name: "복어 특초밥",
+        unlock: "쿡스타 골드 해금",
+        category: "쿡스타 해금",
+        maxGold: 814,
+        servings: 1,
+        ingredients: [
+          { name: "꺼끌복", loc: "어종", count: 1 },
+          { name: "백미", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "sea_horse_fry",
+        name: "해마 튀김",
+        unlock: "코카니지 5레벨 달성",
+        category: "직원 레벨업",
+        maxGold: 814,
+        servings: 4,
+        ingredients: [
+          { name: "해마", loc: "어종", count: 3 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "sea_grape_special_sushi",
+        name: "바다포도 특초밥",
+        unlock: "쿡스타 골드 해금",
+        category: "쿡스타 해금",
+        maxGold: 740,
+        servings: 1,
+        ingredients: [
+          { name: "바다포도", loc: "해초", count: 1 },
+          { name: "백미", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "scad_miso_soup",
+        name: "새가라지 된장구이",
+        unlock: "쿡스타 골드 해금",
+        category: "쿡스타 해금",
+        maxGold: 684,
+        servings: 7,
+        ingredients: [
+          { name: "새가라지", loc: "어종", count: 5 },
+          { name: "미소된장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "pufferfish_nikogori",
+        name: "복어 니코고리",
+        unlock: "직원1명 레벨5 달성",
+        category: "직원 레벨업",
+        maxGold: 666,
+        servings: 7,
+        ingredients: [
+          { name: "가시복", loc: "어종", count: 3 },
+          { name: "우뭇가사리", loc: "해초", count: 1 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "sea_grape_grouper_chirashi",
+        name: "바다포도 무늬바리 회덮밥",
+        unlock: "쿡스타 골드 해금",
+        category: "쿡스타 해금",
+        maxGold: 647,
+        servings: 7,
+        ingredients: [
+          { name: "무늬바리", loc: "어종", count: 3 },
+          { name: "바다포도", loc: "해초", count: 1 },
+          { name: "백미", loc: "농장", count: 1 }
+        ]
+      },
+      {
+        id: "red_seabream_gamtae_soup",
+        name: "빨간매가리 감태국",
+        unlock: "직원2명 레벨5 달성",
+        category: "직원 레벨업",
+        maxGold: 555,
+        servings: 7,
+        ingredients: [
+          { name: "빨간매가리", loc: "어종", count: 3 },
+          { name: "감태", loc: "해초", count: 1 }
+        ]
+      },
+      {
+        id: "saury_curry",
+        name: "꽁치 커리",
+        unlock: "쿡스타 실버 해금",
+        category: "쿡스타 해금",
+        maxGold: 351,
+        servings: 6,
+        ingredients: [
+          { name: "꽁치", loc: "어종", count: 2 },
+          { name: "강황", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "scad_kelp_ochazuke",
+        name: "다시마 흑점줄전쟁이 오차즈케",
+        unlock: "쿡스타 실버 해금",
+        category: "쿡스타 해금",
+        maxGold: 344,
+        servings: 7,
+        ingredients: [
+          { name: "흑점줄전쟁이", loc: "어종", count: 3 },
+          { name: "다시마", loc: "해초", count: 1 }
+        ]
+      },
+      {
+        id: "yellow_snapper_kelp_roll",
+        name: "노랑촉수 다시마 말이",
+        unlock: "쿡스타 실버 해금",
+        category: "쿡스타 해금",
+        maxGold: 296,
+        servings: 7,
+        ingredients: [
+          { name: "노랑촉수", loc: "어종", count: 3 },
+          { name: "다시마", loc: "해초", count: 1 }
+        ]
+      },
+      {
+        id: "whitefin_shark_head_roast",
+        name: "백기흉상어 머리 통구이",
+        unlock: "요시에 방문",
+        category: "배틀/VIP",
+        maxGold: 196,
+        servings: 7,
+        ingredients: [
+          { name: "백기흉상어", loc: "어종", count: 1 },
+          { name: "올리브오일", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "tokoroten",
+        name: "도코로텐",
+        unlock: "쿡스타 브론즈 해금",
+        category: "쿡스타 해금",
+        maxGold: 188,
+        servings: 7,
+        ingredients: [
+          { name: "우뭇가사리", loc: "해초", count: 1 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "striped_beakfish_soy_sauce_stew",
+        name: "황돔어 간장조림",
+        unlock: "쿡스타 브론즈 해금",
+        category: "쿡스타 해금",
+        maxGold: 185,
+        servings: 7,
+        ingredients: [
+          { name: "황돔어", loc: "어종", count: 1 },
+          { name: "간장", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "gamtae_vinegar_salad",
+        name: "감태 초무침",
+        unlock: "쿡스타 브론즈 해금",
+        category: "쿡스타 해금",
+        maxGold: 185,
+        servings: 6,
+        ingredients: [
+          { name: "감태", loc: "해초", count: 2 },
+          { name: "흑식초", loc: "조미료", count: 1 }
+        ]
+      },
+      {
+        id: "filefish_salt_roast",
+        name: "붉은이빨쥐치 소금구이",
+        unlock: "쿡스타 브론즈 해금",
+        category: "쿡스타 해금",
+        maxGold: 177,
+        servings: 6,
+        ingredients: [
+          { name: "붉은이빨쥐치", loc: "어종", count: 2 },
+          { name: "소금", loc: "조미료", count: 1 }
+        ]
+      }
+    ];
+
+    let currentParty = "ALL";
+    let searchQuery = "";
+    let currentSort = "maxGold";
+
+    const recipeGrid = document.getElementById("recipeGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const partyButtons = document.querySelectorAll(".party-btn");
+
+    function render() {
+      let filtered = RECIPES.filter(r => {
+        const matchesParty = currentParty === "ALL" || r.category === currentParty || (r.unlock && r.unlock.includes(currentParty));
+        const matchesSearch = r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          r.unlock.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          r.ingredients.some(i => i.name.toLowerCase().includes(searchQuery.toLowerCase()) || i.loc.toLowerCase().includes(searchQuery.toLowerCase()));
+        return matchesParty && matchesSearch;
+      });
+
+      filtered.sort((a, b) => {
+        if (currentSort === "maxGold") return b.maxGold - a.maxGold;
+        if (currentSort === "totalRevenue") return (b.maxGold * b.servings) - (a.maxGold * a.servings);
+        if (currentSort === "servings") return b.servings - a.servings;
+        if (currentSort === "name") return a.name.localeCompare(b.name, "ko");
+        return 0;
+      });
+
+      if (filtered.length === 0) {
+        recipeGrid.innerHTML = `<div class="empty-state">조건에 해당하는 요리를 찾을 수 없습니다.</div>`;
+        return;
+      }
+
+      recipeGrid.innerHTML = filtered.map(r => {
+        const totalYield = r.maxGold * r.servings;
+
+        return `
+          <div class="recipe-card">
+            <div>
+              <div class="card-top">
+                <div class="recipe-name">${r.name}</div>
+                <span class="party-tag">${r.category}</span>
+              </div>
+              <div class="unlock-condition">조건: <span>${r.unlock}</span></div>
+
+              <div class="stat-row">
+                <div class="stat-box">
+                  <div class="stat-title">10Lv 판매가</div>
+                  <div class="stat-value gold">${r.maxGold.toLocaleString()} 원</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-title">서빙 접시수</div>
+                  <div class="stat-value servings">🍽️ ${r.servings}그릇</div>
+                </div>
+              </div>
+
+              <div class="total-yield-banner">
+                <span class="total-yield-title">1회 조리 총 매출:</span>
+                <span class="total-yield-val">${totalYield.toLocaleString()} 원</span>
+              </div>
+            </div>
+
+            <div class="ingredients-box">
+              <div class="ing-title">1회 조리 소모 재료:</div>
+              <ul class="ing-list">
+                ${r.ingredients.map(ing => `
+                  <li class="ing-item">
+                    <div class="ing-name-wrap">
+                      <span>${ing.name}</span>
+                      <span class="ing-loc">${ing.loc}</span>
+                    </div>
+                    <span class="ing-count">${ing.count}개</span>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    partyButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        partyButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentParty = btn.getAttribute("data-party");
+        render();
+      });
+    });
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      render();
+    });
+
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS9ZHKPN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R76KEE5TRM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R76KEE5TRM');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-adsense-account" content="ca-pub-6397254392843786">
+  <title>직원 스탯 & 스킬 도감 - 데이브 더 다이버 | Emag</title>
+  <style>
+    :root {
+      --bg-color: #0a1118;
+      --card-bg: #121e2b;
+      --card-hover: #18293a;
+      --text-color: #f0f4f8;
+      --desc-color: #8da2b5;
+      --border-color: #1f3347;
+      --accent-dave: #00b4d8;
+      --accent-gold: #ffd166;
+      --accent-green: #06d6a0;
+      --accent-cook: #ff9f1c;
+      --accent-serve: #2ec4b6;
+      --accent-procure: #e71d36;
+      --accent-charm: #ff99c8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* 네비게이션 */
+    nav {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent-dave); }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--desc-color);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* 메인 컨테이너 */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--desc-color);
+      margin-bottom: 16px;
+    }
+    .breadcrumb a {
+      color: var(--desc-color);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover { color: #fff; }
+
+    .header-section {
+      margin-bottom: 24px;
+    }
+    .header-section h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-section p {
+      color: var(--desc-color);
+      font-size: 0.98rem;
+    }
+
+    /* 종결 배치 추천 배너 */
+    .recommend-section {
+      background: #0d1723;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .recommend-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .recommend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .recommend-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .recommend-card h3 {
+      font-size: 0.95rem;
+      color: var(--accent-dave);
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+    }
+    .recommend-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+    }
+    .recommend-row:last-child { margin-bottom: 0; }
+    .recommend-role { color: var(--desc-color); }
+    .recommend-name { font-weight: 700; color: #fff; }
+
+    /* 제어 패널 */
+    .control-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .filter-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--desc-color);
+      min-width: 70px;
+    }
+
+    .party-btn {
+      background: #18293a;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .party-btn:hover { border-color: var(--accent-dave); }
+    .party-btn.active {
+      background: var(--accent-dave);
+      color: #041421;
+      font-weight: 700;
+      border-color: var(--accent-dave);
+    }
+
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 240px;
+      background: #0d1622;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.92rem;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--accent-dave); }
+
+    .select-box {
+      background: #0d1622;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* 직원 카드 그리드 */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 18px;
+    }
+
+    .staff-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .staff-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 180, 216, 0.4);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+    .staff-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .role-tag {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(0, 180, 216, 0.15);
+      color: var(--accent-dave);
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      white-space: nowrap;
+    }
+
+    .staff-quote {
+      font-size: 0.78rem;
+      color: #8da2b5;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .cost-badge {
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+    }
+
+    /* 4대 스탯 그리드 */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .stat-box {
+      background: #172433;
+      border-radius: 8px;
+      padding: 8px 4px;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--desc-color);
+      margin-bottom: 2px;
+    }
+    .stat-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .stat-val.cook { color: var(--accent-cook); }
+    .stat-val.serve { color: var(--accent-serve); }
+    .stat-val.procure { color: var(--accent-procure); }
+    .stat-val.charm { color: var(--accent-charm); }
+
+    /* 고유 스킬 리스트 */
+    .skill-box {
+      background: #0d1622;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .skill-row {
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      display: flex;
+      flex-direction: column;
+    }
+    .skill-row:last-child { margin-bottom: 0; }
+    .skill-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+    .skill-level {
+      font-size: 0.68rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: #1f3347;
+      color: #00b4d8;
+      font-weight: 700;
+    }
+    .skill-name {
+      font-weight: 700;
+      color: #e0f2fe;
+    }
+    .skill-desc {
+      font-size: 0.74rem;
+      color: #8da2b5;
+      padding-left: 2px;
+    }
+
+    /* 해금 요리 영역 */
+    .unlock-box {
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.78rem;
+      color: var(--desc-color);
+    }
+    .unlock-item span {
+      color: #ffd166;
+      font-weight: 600;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--desc-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--desc-color);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--card-bg);
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="logo">E<span>mag</span></a>
+    <div class="nav-links">
+      <a href="../index.html">홈으로</a>
+      <a href="index.html">데이브 허브</a>
+      <a href="recipe-calc.html">요리 DB</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">홈</a> &gt; <a href="index.html">데이브 더 다이버 허브</a> &gt; <span>직원 스탯 & 스킬 도감</span>
+    </div>
+
+    <header class="header-section">
+      <h1>👨‍🍳 직원 스탯 & 스킬 도감</h1>
+      <p>본점/분점 최적 종결 배치, 21명 직원의 20레벨 만렙 스탯, 3/7레벨 고유 스킬 및 해금 요리를 확인하세요.</p>
+    </header>
+
+    <!-- 종결 추천 세팅 프리셋 배너 -->
+    <section class="recommend-section">
+      <div class="recommend-title">🏆 반초스시 종결 배치 프리셋 가이드</div>
+      <div class="recommend-grid">
+        <div class="recommend-card">
+          <h3>📍 본점 최적 세팅</h3>
+          <div class="recommend-row"><span class="recommend-role">주방 (요리)</span><span class="recommend-name">마키, 요네</span></div>
+          <div class="recommend-row"><span class="recommend-role">홀 (서빙)</span><span class="recommend-name">엘 니뇨, 랩터 (or 코카니지)</span></div>
+        </div>
+        <div class="recommend-card">
+          <h3>🏢 분점 최적 세팅</h3>
+          <div class="recommend-row"><span class="recommend-role">매니저</span><span class="recommend-name">드레 (5성 분점 종결 매니저)</span></div>
+          <div class="recommend-row"><span class="recommend-role">주방 (요리)</span><span class="recommend-name">찰리, 라울 (or 제임스)</span></div>
+          <div class="recommend-row"><span class="recommend-role">홀 (서빙)</span><span class="recommend-name">빌리, 이츠키</span></div>
+        </div>
+        <div class="recommend-card">
+          <h3>📦 양념 파견 전담팀</h3>
+          <div class="recommend-row"><span class="recommend-role">조달 최강 요원</span><span class="recommend-name">유스케(986), 파이(914), 다비나(859)</span></div>
+          <div class="recommend-row"><span class="recommend-role">파견 추천 예비대</span><span class="recommend-name">마사요시(814), 카롤리나(810), 리우(780)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 필터 및 제어 패널 -->
+    <section class="control-panel">
+      <div class="filter-group">
+        <span class="filter-label">포지션 필터:</span>
+        <button class="party-btn active" data-role="ALL">전체 직원 (21명)</button>
+        <button class="party-btn" data-role="본점 주방">본점 주방 🍳</button>
+        <button class="party-btn" data-role="본점 홀">본점 서빙 🏃</button>
+        <button class="party-btn" data-role="분점 매니저">분점 매니저 👔</button>
+        <button class="party-btn" data-role="분점 요원">분점 요원 🥢</button>
+        <button class="party-btn" data-role="파견 전담">파견 전담 📦</button>
+      </div>
+
+      <div class="search-row">
+        <input type="text" id="searchInput" class="search-input" placeholder="직원 이름, 스킬, 해금 요리 검색 (예: 엘니뇨, 와사비, 칵테일, 삼색오징어...)">
+        <select id="sortSelect" class="select-box">
+          <option value="cook">요리 스탯 높은순</option>
+          <option value="serve">서빙 스탯 높은순</option>
+          <option value="procure">조달(파견) 스탯 높은순</option>
+          <option value="charm">매력 스탯 높은순</option>
+          <option value="cost">고용 비용 낮은순</option>
+          <option value="name">이름순</option>
+        </select>
+      </div>
+    </section>
+
+    <div id="staffGrid" class="staff-grid"></div>
+  </main>
+
+  <footer>
+    <p>© Emag Gaming Hub & Blog. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // 4장의 시트 완벽 반영: 스킬 설명 사전
+    const SKILL_DESC = {
+      "와사비 보충": "와사비를 보충합니다.",
+      "치우기": "지저분한 자리를 치웁니다.",
+      "치우기의 달인": "지저분한 자리를 빨리 치웁니다.",
+      "팁의 달인": "무조건 팁을 받습니다.",
+      "매력만점 직원": "매력이 영구적으로 상승합니다.",
+      "서빙+": "서빙 능력이 영구적으로 상승합니다.",
+      "음료 서빙": "음료를 서빙합니다.",
+      "음료 서빙의 달인": "음료를 완벽하게 서빙합니다.",
+      "칵테일 서빙": "칵테일을 서빙합니다.",
+      "요리+": "요리 능력이 영구적으로 상승합니다.",
+      "요리++": "요리 능력이 영구적으로 크게 상승합니다.",
+      "재료 손질의 고수": "5% 확률로 메뉴의 접시수가 증가합니다.",
+      "재료 손질의 달인": "10% 확률로 메뉴의 접시수가 증가합니다.",
+      "음료 제조의 달인": "음료를 더 비싸게 팔 수 있습니다.",
+      "파견의 달인": "파견 시 구해오는 아이템 수가 증가합니다."
+    };
+
+    // 21명 직원 100% 정밀 확정 데이터 (시트 1:1 매핑)
+    const STAFF = [
+      {
+        name: "쿄코",
+        quote: "아…빨리 돈 벌어서 여행 가야지.",
+        cost: 0,
+        cook: 527,
+        serve: 605,
+        procure: 547,
+        charm: 838,
+        skill3: "음료 서빙",
+        skill7: "팁의 달인",
+        unlocks: { lv15: "흰보리새우 덮밥" },
+        roleTag: "분점 홀 / 서빙",
+        category: ["분점 요원"]
+      },
+      {
+        name: "미첼",
+        quote: "나 이 곳 마음에 들어요. 일, 해보고 싶어요.",
+        cost: 259,
+        cook: 407,
+        serve: 792,
+        procure: 29,
+        charm: 981,
+        skill3: "음료 서빙",
+        skill7: "서빙+",
+        unlocks: { lv15: "활치 오야코동" },
+        roleTag: "매력 1위 / 서빙",
+        category: ["분점 요원"]
+      },
+      {
+        name: "제임스",
+        quote: "으…으…으…",
+        cost: 707,
+        cook: 800,
+        serve: 225,
+        procure: 482,
+        charm: 269,
+        skill3: "요리+",
+        skill7: "재료 손질의 달인",
+        unlocks: { lv15: "해파리 무침" },
+        roleTag: "분점 주방 요원",
+        category: ["분점 요원"]
+      },
+      {
+        name: "찰리",
+        quote: "데이터를 분석해보니 이 초밥집의 잠재력은 높습니다.",
+        cost: 123,
+        cook: 908,
+        serve: 248,
+        procure: 323,
+        charm: 129,
+        skill3: "요리+",
+        skill7: "재료 손질의 고수",
+        unlocks: { lv15: "키다리게 커리" },
+        roleTag: "분점 주방 종결",
+        category: ["분점 요원"]
+      },
+      {
+        name: "빌리",
+        quote: "10, 9, 8, 7, 6, 5, 4, 3, 2, 1…발사!",
+        cost: 562,
+        cook: 408,
+        serve: 723,
+        procure: 467,
+        charm: 291,
+        skill3: "팁의 달인",
+        skill7: "치우기의 달인",
+        unlocks: { lv15: "다홍빛 생선 롤" },
+        roleTag: "분점 홀 종결",
+        category: ["분점 요원"]
+      },
+      {
+        name: "카롤리나",
+        quote: "일도 미모도 저를 따라올 사람은 없죠, 호호호",
+        cost: 410,
+        cook: 621,
+        serve: 417,
+        procure: 810,
+        charm: 449,
+        skill3: "와사비 보충",
+        skill7: "팁의 달인",
+        unlocks: { lv15: "카오리포" },
+        roleTag: "파견 추천 (조달 810)",
+        category: ["파견 전담"]
+      },
+      {
+        name: "요네",
+        quote: "매운 맛을 보여주겠어요!",
+        cost: 1464,
+        cook: 901,
+        serve: 154,
+        procure: 385,
+        charm: 126,
+        skill3: "요리++",
+        skill7: "재료 손질의 고수",
+        unlocks: { lv15: "해마해초 샐러드" },
+        roleTag: "본점 주방 종결",
+        category: ["본점 주방"]
+      },
+      {
+        name: "리우",
+        quote: "이 선택, 후회하지 않을 겁니다.",
+        cost: 125,
+        cook: 550,
+        serve: 455,
+        procure: 780,
+        charm: 509,
+        skill3: "치우기",
+        skill7: "서빙+",
+        unlocks: { lv15: "삼색오징어구이" },
+        roleTag: "종결 레시피 해금 / 파견",
+        category: ["파견 전담", "분점 요원"]
+      },
+      {
+        name: "파이",
+        quote: "아직 건재하다는 것을 보여주겠네.",
+        cost: 467,
+        cook: 594,
+        serve: 466,
+        procure: 914,
+        charm: 418,
+        skill3: "요리+",
+        skill7: "서빙+",
+        unlocks: { lv15: "해초 계란말이" },
+        roleTag: "조달 2위 (조달 914)",
+        category: ["파견 전담"]
+      },
+      {
+        name: "엘 니뇨",
+        quote: "속도와 화려함이 생명입니다.",
+        cost: 2327,
+        cook: 126,
+        serve: 986,
+        procure: 425,
+        charm: 138,
+        skill3: "음료 서빙의 달인",
+        skill7: "치우기의 달인",
+        unlocks: { lv15: "머구리농어 스테이크" },
+        roleTag: "본점 홀 0티어 종결",
+        category: ["본점 홀"]
+      },
+      {
+        name: "마키",
+        quote: "아빠에게 약속한대로 멋진 요리사가 될 거예요.",
+        cost: 0,
+        cook: 1055,
+        serve: 33,
+        procure: 20,
+        charm: 20,
+        skill3: "요리+",
+        skill7: "요리++",
+        unlocks: { lv15: "전쟁이 난반즈케" },
+        roleTag: "요리 1위 (본점 주방)",
+        category: ["본점 주방"]
+      },
+      {
+        name: "토호쿠",
+        quote: "머리가 빠질 만큼 단련하고 왔습니다.",
+        cost: 1307,
+        cook: 739,
+        serve: 99,
+        procure: 155,
+        charm: 808,
+        skill3: "요리+",
+        skill7: "요리++",
+        unlocks: { lv15: "열대어 마늘구이" },
+        roleTag: "분점 주방 요원",
+        category: ["분점 요원"]
+      },
+      {
+        name: "유스케",
+        quote: "수련의 성과를 보여드릴 기회가 왔군요.",
+        cost: 267,
+        cook: 850,
+        serve: 218,
+        procure: 986,
+        charm: 160,
+        skill3: "재료 손질의 고수",
+        skill7: "요리+",
+        unlocks: { lv15: "가지 새우완자 튀김" },
+        roleTag: "조달 1위 (조달 986)",
+        category: ["파견 전담"]
+      },
+      {
+        name: "잔디",
+        quote: "꼼꼼하게 원칙을 지키며 일하겠습니다.",
+        cost: 302,
+        cook: 542,
+        serve: 579,
+        procure: 510,
+        charm: 506,
+        skill3: "팁의 달인",
+        skill7: "와사비 보충",
+        unlocks: { lv15: "놀래기 커리" },
+        roleTag: "서빙 / 와사비 보충",
+        category: ["분점 요원"]
+      },
+      {
+        name: "이츠키",
+        quote: "임무는 실패하지 않겠습니다, 주군.",
+        cost: 4,
+        cook: 438,
+        serve: 932,
+        procure: 628,
+        charm: 963,
+        skill3: "음료 서빙",
+        skill7: "매력만점 직원",
+        unlocks: { lv15: "상어 가라아게" },
+        roleTag: "분점 홀 종결",
+        category: ["분점 요원"]
+      },
+      {
+        name: "라울",
+        quote: "요리는 힘! 힘은 근육으로부터.",
+        cost: 991,
+        cook: 541,
+        serve: 541,
+        procure: 541,
+        charm: 541,
+        skill3: "재료 손질의 달인",
+        skill7: "음료 제조의 달인",
+        unlocks: { lv15: "비악상어 조림" },
+        roleTag: "올라운더 / 분점 요원",
+        category: ["분점 요원", "분점 매니저"]
+      },
+      {
+        name: "드레",
+        quote: "초밥맛을 테스트할 사람이 필요하다면 제가 적임입니다.",
+        cost: 297,
+        cook: 896,
+        serve: 855,
+        procure: 666,
+        charm: 744,
+        skill3: "치우기",
+        skill7: "칵테일 서빙",
+        unlocks: { lv5: "새우튀김 특초밥", lv10: "열빙어 구이", lv15: "아이스피쉬 커리" },
+        roleTag: "분점 매니저 0티어",
+        category: ["분점 매니저"]
+      },
+      {
+        name: "랩터",
+        quote: "랩터라고 합니다. 전세계의 게이머 친구들이여, 함께 합시다.",
+        cost: 1150,
+        cook: 304,
+        serve: 910,
+        procure: 770,
+        charm: 194,
+        skill3: "와사비 보충",
+        skill7: "칵테일 서빙",
+        unlocks: { lv5: "흰다리자숙새우 튀김", lv10: "보라성게 덮밥", lv15: "갑오징어 어니언링" },
+        roleTag: "본점 홀 종결",
+        category: ["본점 홀"]
+      },
+      {
+        name: "코카니지",
+        quote: "바닷가에서 일해보는 것이 제 꿈이었거든요.",
+        cost: 1079,
+        cook: 360,
+        serve: 914,
+        procure: 150,
+        charm: 672,
+        skill3: "팁의 달인",
+        skill7: "칵테일 서빙",
+        unlocks: { lv5: "해마 튀김", lv10: "쏠배감펭 튀김", lv15: "풀가사리 핫도그" },
+        roleTag: "홀 서빙 예비대",
+        category: ["본점 홀", "분점 요원"]
+      },
+      {
+        name: "다비나",
+        quote: "이곳에서 모험의 기운이 느껴지는군요!",
+        cost: 143,
+        cook: 490,
+        serve: 360,
+        procure: 859,
+        charm: 915,
+        skill3: "매력만점 직원",
+        skill7: "파견의 달인",
+        unlocks: { lv15: "일각고래 미소된장국" },
+        roleTag: "조달 3위 (파견의 달인)",
+        category: ["파견 전담"]
+      },
+      {
+        name: "마사요시",
+        quote: "내가 칼은 좀 쓸 수 있는데 말이지.",
+        cost: 551,
+        cook: 786,
+        serve: 253,
+        procure: 814,
+        charm: 378,
+        skill3: "재료 손질의 고수",
+        skill7: "파견의 달인",
+        unlocks: { lv15: "바다포도 계란덮밥" },
+        roleTag: "파견 추천 (파견의 달인)",
+        category: ["파견 전담"]
+      }
+    ];
+
+    let currentRole = "ALL";
+    let searchQuery = "";
+    let currentSort = "cook";
+
+    const staffGrid = document.getElementById("staffGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const roleButtons = document.querySelectorAll(".party-btn");
+
+    function render() {
+      let filtered = STAFF.filter(s => {
+        const matchesRole = currentRole === "ALL" || s.category.includes(currentRole);
+        const query = searchQuery.toLowerCase();
+        const matchesSearch = s.name.toLowerCase().includes(query) ||
+          s.roleTag.toLowerCase().includes(query) ||
+          s.skill3.toLowerCase().includes(query) ||
+          s.skill7.toLowerCase().includes(query) ||
+          Object.values(s.unlocks).some(u => u.toLowerCase().includes(query));
+        return matchesRole && matchesSearch;
+      });
+
+      filtered.sort((a, b) => {
+        if (currentSort === "cook") return b.cook - a.cook;
+        if (currentSort === "serve") return b.serve - a.serve;
+        if (currentSort === "procure") return b.procure - a.procure;
+        if (currentSort === "charm") return b.charm - a.charm;
+        if (currentSort === "cost") return a.cost - b.cost;
+        if (currentSort === "name") return a.name.localeCompare(b.name, "ko");
+        return 0;
+      });
+
+      if (filtered.length === 0) {
+        staffGrid.innerHTML = `<div class="empty-state">조건에 일치하는 직원을 찾을 수 없습니다.</div>`;
+        return;
+      }
+
+      staffGrid.innerHTML = filtered.map(s => {
+        const unlockHtml = [];
+        if (s.unlocks.lv5) unlockHtml.push(`Lv.5: <span>${s.unlocks.lv5}</span>`);
+        if (s.unlocks.lv10) unlockHtml.push(`Lv.10: <span>${s.unlocks.lv10}</span>`);
+        if (s.unlocks.lv15) unlockHtml.push(`Lv.15: <span>${s.unlocks.lv15}</span>`);
+
+        return `
+          <div class="staff-card">
+            <div>
+              <div class="card-top">
+                <div class="staff-name">${s.name}</div>
+                <span class="role-tag">${s.roleTag}</span>
+              </div>
+              <div class="staff-quote">"${s.quote}"</div>
+              <div class="cost-badge">💰 고용 비용: ${s.cost === 0 ? "무료(스토리 해금)" : s.cost.toLocaleString() + " G"}</div>
+
+              <div class="stat-grid">
+                <div class="stat-box">
+                  <div class="stat-label">요리(Lv20)</div>
+                  <div class="stat-val cook">${s.cook}</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">서빙(Lv20)</div>
+                  <div class="stat-val serve">${s.serve}</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">조달(Lv20)</div>
+                  <div class="stat-val procure">${s.procure}</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-label">매력(Lv20)</div>
+                  <div class="stat-val charm">${s.charm}</div>
+                </div>
+              </div>
+
+              <div class="skill-box">
+                <div class="skill-row">
+                  <div class="skill-header">
+                    <span class="skill-level">Lv.3</span>
+                    <span class="skill-name">${s.skill3}</span>
+                  </div>
+                  <div class="skill-desc">${SKILL_DESC[s.skill3] || ""}</div>
+                </div>
+                <div class="skill-row">
+                  <div class="skill-header">
+                    <span class="skill-level">Lv.7</span>
+                    <span class="skill-name">${s.skill7}</span>
+                  </div>
+                  <div class="skill-desc">${SKILL_DESC[s.skill7] || ""}</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="unlock-box">
+              <div style="font-weight: 600; color: #fff; margin-bottom: 2px;">🍳 레벨별 요리 해금:</div>
+              ${unlockHtml.map(u => `<div class="unlock-item">${u}</div>`).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    roleButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        roleButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentRole = btn.getAttribute("data-role");
+        render();
+      });
+    });
+
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      render();
+    });
+
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      render();
+    });
+
+    render();
+  </script>
+</body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS9ZHKPN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</html>
