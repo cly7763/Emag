@@ -2,31 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- 메인 페이지 -->
   <url>
-    <loc>https://emag01.com/</loc>
+    <loc>https://emag.createdmk.com/</loc>
     <priority>1.0</priority>
   </url>
 
   <!-- 메이플 허브 페이지 -->
   <url>
-    <loc>https://emag01.com/maple/</loc>
+    <loc>https://emag.createdmk.com/maple/</loc>
     <priority>0.8</priority>
   </url>
 
   <!-- 메이플 계산기 및 검색 페이지들 -->
   <url>
-    <loc>https://emag01.com/maple/boss-calc.html</loc>
+    <loc>https://emag.createdmk.com/maple/boss-calc.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://emag01.com/maple/search.html</loc>
+    <loc>https://emag.createdmk.com/maple/search.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://emag01.com/maple/starforce-calc.html</loc>
+    <loc>https://emag.createdmk.com/maple/starforce-calc.html</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://emag01.com/maple/symbol-calc.html</loc>
+    <loc>https://emag.createdmk.com/maple/symbol-calc.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!--데이브 더 다이버-->
+  <url>
+    <loc>https://emag.createdmk.com/maple/dave-the-dive.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/recipe-calc.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/recipe-calc-en.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/fish-farm-en</loc>
+    <priority>0.8</priority>
+  </url>
+    <url>
+    <loc>https://emag.createdmk.com/davethediver/fish-farm</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/staff-sim</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/staff-sim</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/staff-sim-en</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/index</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://emag.createdmk.com/davethediver/index-en</loc>
     <priority>0.8</priority>
   </url>
 </urlset>
